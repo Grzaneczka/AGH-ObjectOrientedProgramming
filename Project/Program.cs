@@ -10,7 +10,10 @@ namespace Project
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Test");
+            Person person1 = new Person("Adam", "Adamski", "678-658-789", Sex.Man, "DSC 234561");
+
+            Console.WriteLine(person1);
+
             Console.ReadLine();
         }
     }
