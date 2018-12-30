@@ -14,7 +14,7 @@ namespace Project
 
         private string name;
         private string surname;
-        private string iD_number;  // Numer dowodu osobistego 
+        private string iDNumber;  // Numer dowodu osobistego 
         private string phone;
         private Sex sex;
 
@@ -45,12 +45,12 @@ namespace Project
 
         public string ID_numer
         {
-            get { return iD_number; }
+            get { return iDNumber; }
             set
             {
                 if (!validateID_number(value))
                     throw new WrongID_numberException(value);
-                iD_number = value;
+                iDNumber = value;
             }
         }
 
@@ -71,7 +71,7 @@ namespace Project
 
         public override string ToString()
         {
-            return this.name + " " + this.surname + " " + this.phone + " " + this.sex + " " + this.iD_number;
+            return this.name + " " + this.surname + " " + this.phone + " " + this.sex + " " + this.iDNumber;
         }
 
         // Metody sprawdzające poprawność

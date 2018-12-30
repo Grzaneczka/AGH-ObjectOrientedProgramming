@@ -43,12 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Employee.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="core\Client.cs" />
+    <Compile Include="core\Employee.cs" />
+    <Compile Include="core\Person.cs" />
+    <Compile Include="core\Room.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WrongID_numberException.cs" />
-    <Compile Include="WrongPhoneException.cs" />
+    <Compile Include="core\WrongID_numberException.cs" />
+    <Compile Include="core\WrongPhoneException.cs" />
+    <Compile Include="core\WrongEmailException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
