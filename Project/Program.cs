@@ -32,6 +32,9 @@ namespace Project
             
             // COŚ JEST BŁĘDNIE W REZERWACJI NIE DZIAŁA POKÓJ
             Reservation reservation1 = new Reservation(client1, "2019/01/12", "2019/01/21", false, false, true);
+            Console.WriteLine(reservation1);
+            Console.WriteLine();
+
             reservation1.AddRoom(room1);
             Console.WriteLine(reservation1);
             Console.WriteLine();

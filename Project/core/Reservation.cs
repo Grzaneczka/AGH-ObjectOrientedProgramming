@@ -59,7 +59,7 @@ namespace Project
             return (int)days.TotalDays;
         }
 
-        public void AddRoom(Room room)  //TO NIE DZIAŁA 
+        public void AddRoom(Room room)  
         {
             this.rooms.Add(room);
         }
@@ -71,10 +71,11 @@ namespace Project
             StringBuilder builder = new StringBuilder();
 
             builder.AppendLine("Client: " + this.client);
+            builder.Append("Room:  ");
 
             foreach (Room room in rooms)
             {
-                builder.AppendLine(rooms.ToString());
+                builder.AppendLine(room.ToString());
             }
 
             builder.AppendLine("Check-in date: " + this.checkInDate + "  Check-out date: " + this.checkOutDate);
