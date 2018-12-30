@@ -13,7 +13,7 @@ namespace Project
 
         // Konstruktory 
 
-        public Client(string name, string surname, string phone, Sex sex, string email, string idNumber) : base(name, surname, phone, sex, idNumber)
+        public Client(string name, string surname, string phone, Sex sex, string email, string idNumber) : base(name, surname, sex, phone, idNumber)
         {
             this.Email = email;
         }
@@ -51,7 +51,7 @@ namespace Project
             return true;
         }
          
-        // Metoda Pełna nazwa 
+        // Metody dodatkowe
 
         public virtual string FullName()
         {

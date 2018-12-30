@@ -46,13 +46,7 @@ namespace Project
 
         public override string ToString()
         {
-            StringBuilder builder = new StringBuilder();
-
-            builder.AppendFormat("Room number: {0}\n", this.roomNumber);
-            builder.AppendFormat("Number of single beds: {0},   Number of marriage beds: {1}\n ", this.numberOfSingleBeds, this.numberOfMarriageBeds);
-            builder.AppendFormat("Is balcony: {0},   Is clear: {1},   Is free: {2}\n ", this.isBalcony, this.isClear, this.isFree);
-
-            return builder.ToString();
+            return "Room number: " + this.roomNumber + "  Number of single beds: " + this.numberOfSingleBeds + "  Number of marriage beds: " + this.numberOfMarriageBeds + "  Is balcony: " + this.isBalcony + "  Is clear: " + this.isClear + "  Is free: " + this.isFree;
         }
 
     }

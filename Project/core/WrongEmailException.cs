@@ -8,6 +8,13 @@ namespace Project
 {
     class WrongEmailException : FormatException
     {
-        public WrongEmailException(string email) : base("Invalid email: " + email) { }
+        readonly string email;
+
+        public WrongEmailException(string email) : base("Invalid email: " + email)
+        {
+            this.email = email;
+        }
+
+        public string Email => email;
     }
 }

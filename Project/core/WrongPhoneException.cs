@@ -8,6 +8,13 @@ namespace Project
 {
     class WrongPhoneException : FormatException
     {
-        public WrongPhoneException(string phone) : base("Invalid phone number: " + phone) { }
+        readonly string phone;
+
+        public WrongPhoneException(string phone) : base("Invalid phone number: " + phone)
+        {
+            this.phone = phone;
+        }
+
+        public string Phone => phone;
     }
 }

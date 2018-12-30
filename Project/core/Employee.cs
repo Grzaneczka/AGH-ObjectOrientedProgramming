@@ -12,7 +12,7 @@ namespace Project
 
         // Konstruktory 
 
-        public Employee(string name, string surname, string phone, Sex sex, string function) : base(name, surname, phone, sex)
+        public Employee(string name, string surname, string phone, Sex sex, string function) : base(name, surname, sex, phone)
         {
             this.Function = function;
         }
