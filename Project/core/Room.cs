@@ -14,18 +14,16 @@ namespace Project
 
         bool isBalcony;
         bool isClear;
-        bool isFree;
 
-        // Konstruktory 
+       // Konstruktory 
 
-        public Room(int roomNumber, int numberOfSingleBeds, int numberOfMarriageBeds, bool isBalcony, bool isClear, bool isFree)
+        public Room(int roomNumber, int numberOfSingleBeds, int numberOfMarriageBeds, bool isBalcony, bool isClear)
         {
             this.roomNumber = roomNumber;
             this.numberOfSingleBeds = numberOfSingleBeds;
             this.numberOfMarriageBeds = numberOfMarriageBeds;
             this.isBalcony = isBalcony;
             this.isClear = isClear;
-            this.isFree = isFree;
         }
 
         // Getery i Setery 
@@ -40,13 +38,18 @@ namespace Project
 
         public bool IsClear { get => isClear; set => isClear = value; }
 
-        public bool IsFree { get => isFree; set => isFree = value; }
+        // Metody dodatkowe
+
+        public int NumberOfPeople()
+        {
+            return (numberOfSingleBeds * 1 + numberOfMarriageBeds * 2);
+        }
 
         // To string 
 
         public override string ToString()
         {
-            return "Room number: " + this.roomNumber + "  Number of single beds: " + this.numberOfSingleBeds + "  Number of marriage beds: " + this.numberOfMarriageBeds + "  Is balcony: " + this.isBalcony + "  Is clear: " + this.isClear + "  Is free: " + this.isFree;
+            return "Room number: " + this.roomNumber + " Number of people: " + NumberOfPeople() + "  Number of single beds: " + this.numberOfSingleBeds + "  Number of marriage beds: " + this.numberOfMarriageBeds + "  Is balcony: " + this.isBalcony + "  Is clear: " + this.isClear;
         }
 
     }

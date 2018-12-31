@@ -14,6 +14,10 @@ namespace Project
         private DateTime checkInDate;
         private DateTime checkOutDate;
 
+        private int numberOfPeople;
+        private int numberOfChildren;
+        private int numberOfBabies;
+
         private bool isCheckIn;
         private bool isCheckOut;
         private bool isAdvancePaid;
@@ -25,7 +29,7 @@ namespace Project
             rooms = new List<Room>();
         }
 
-        public Reservation(Client client, string checkInDate, string checkOutDate, bool checkIn, bool checkOut, bool advance) : this()
+        public Reservation(Client client, string checkInDate, string checkOutDate,int numberOfPeople, int numberOfChildren, int numberOfBabies, bool checkIn, bool checkOut, bool advance) : this()
         {
             if (!DateTime.TryParseExact(checkInDate, new[] { "yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yy", "dd-MM-yy" }, null, DateTimeStyles.None, out this.checkInDate)) 
                 throw new FormatException("Invalid date format");
@@ -34,6 +38,9 @@ namespace Project
                 throw new FormatException("Invalid date format");
 
             this.client = client;
+            this.NumberOfPeople = numberOfPeople;
+            this.NumberOfChildren = numberOfChildren;
+            this.NumberOfBabies = NumberOfBabies;
             this.IsCheckIn = checkIn;
             this.IsCheckOut = checkOut;
             this.IsAdvancePaid = advance;
@@ -44,6 +51,12 @@ namespace Project
         public DateTime CheckInDate { get => checkInDate; set => checkInDate = value; }
 
         public DateTime CheckOutDate { get => checkOutDate; set => checkOutDate = value; }
+
+        public int NumberOfPeople { get => numberOfPeople; set => numberOfPeople = value; }
+
+        public int NumberOfChildren { get => numberOfChildren; set => numberOfChildren = value; }
+
+        public int NumberOfBabies { get => numberOfBabies; set => numberOfBabies = value; }
 
         public bool IsCheckIn { get => isCheckIn; set => isCheckIn = value; }
 
@@ -63,6 +76,12 @@ namespace Project
         {
             this.rooms.Add(room);
         }
+
+        //NIE DOKOŃCZONA METODA KOSZTU
+        //public double Cost()
+        //{
+        //    return numberOfPeople; 
+        //}
 
         // To string 
 
@@ -84,7 +103,6 @@ namespace Project
 
             return builder.ToString();
         }
-
        
     }
 }

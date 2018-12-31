@@ -22,16 +22,16 @@ namespace Project
             Console.WriteLine(client1);
             Console.WriteLine();
 
-            Room room1 = new Room(13, 15, 234, false, true, true);
+            Room room1 = new Room(1, 1, 1, false, true);
             Console.WriteLine(room1);
             Console.WriteLine();
 
             SinglePayment singlePayment1 = new SinglePayment("Kawusia", 11.69, 2, false);
             Console.WriteLine(singlePayment1);
             Console.WriteLine();
-            
+
             // COŚ JEST BŁĘDNIE W REZERWACJI NIE DZIAŁA POKÓJ
-            Reservation reservation1 = new Reservation(client1, "2019/01/12", "2019/01/21", false, false, true);
+            Reservation reservation1 = new Reservation(client1, "2019/01/12", "2019/01/21", 3, 1, 0, false, false, true);
             Console.WriteLine(reservation1);
             Console.WriteLine();
 
