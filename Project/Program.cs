@@ -23,7 +23,11 @@ namespace Project
             Console.WriteLine();
 
             Room room1 = new Room(1, 1, 1, false, true);
-            Console.WriteLine(room1);
+            Console.WriteLine(room1.NumberOfPeople());
+            Console.WriteLine();
+
+            Room room2 = new Room(2, 1, 0, false, true);
+            Console.WriteLine(room2.NumberOfPeople());
             Console.WriteLine();
 
             SinglePayment singlePayment1 = new SinglePayment("Kawusia", 11.69, 2, false);
@@ -31,11 +35,12 @@ namespace Project
             Console.WriteLine();
 
             // COŚ JEST BŁĘDNIE W REZERWACJI NIE DZIAŁA POKÓJ
-            Reservation reservation1 = new Reservation(client1, "2019/01/12", "2019/01/21", 3, 1, 0, false, false, true);
+            Reservation reservation1 = new Reservation(client1, "2019/06/12", "2019/06/21", 3, 1, 0, false, false, true);
             Console.WriteLine(reservation1);
             Console.WriteLine();
 
             reservation1.AddRoom(room1);
+            reservation1.AddRoom(room2);
             Console.WriteLine(reservation1);
             Console.WriteLine();
 

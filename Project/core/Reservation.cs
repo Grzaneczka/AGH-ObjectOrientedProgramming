@@ -14,7 +14,7 @@ namespace Project
         private DateTime checkInDate;
         private DateTime checkOutDate;
 
-        private int numberOfPeople;
+        private int numberOfAdults;
         private int numberOfChildren;
         private int numberOfBabies;
 
@@ -29,7 +29,7 @@ namespace Project
             rooms = new List<Room>();
         }
 
-        public Reservation(Client client, string checkInDate, string checkOutDate,int numberOfPeople, int numberOfChildren, int numberOfBabies, bool checkIn, bool checkOut, bool advance) : this()
+        public Reservation(Client client, string checkInDate, string checkOutDate,int numberOfAdults, int numberOfChildren, int numberOfBabies, bool checkIn, bool checkOut, bool advance) : this()
         {
             if (!DateTime.TryParseExact(checkInDate, new[] { "yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yy", "dd-MM-yy" }, null, DateTimeStyles.None, out this.checkInDate)) 
                 throw new FormatException("Invalid date format");
@@ -38,7 +38,7 @@ namespace Project
                 throw new FormatException("Invalid date format");
 
             this.client = client;
-            this.NumberOfPeople = numberOfPeople;
+            this.NumberOfAdults = numberOfAdults;
             this.NumberOfChildren = numberOfChildren;
             this.NumberOfBabies = NumberOfBabies;
             this.IsCheckIn = checkIn;
@@ -52,7 +52,7 @@ namespace Project
 
         public DateTime CheckOutDate { get => checkOutDate; set => checkOutDate = value; }
 
-        public int NumberOfPeople { get => numberOfPeople; set => numberOfPeople = value; }
+        public int NumberOfAdults { get => numberOfAdults; set => numberOfAdults = value; }
 
         public int NumberOfChildren { get => numberOfChildren; set => numberOfChildren = value; }
 
@@ -77,11 +77,83 @@ namespace Project
             this.rooms.Add(room);
         }
 
-        //NIE DOKOŃCZONA METODA KOSZTU
-        //public double Cost()
-        //{
-        //    return numberOfPeople; 
-        //}
+        public int NumberOfPeople()
+        {
+            return this.NumberOfAdults + this.NumberOfChildren + this.NumberOfBabies;
+        }
+
+        // Cena wyliczana ze wzoru = (Cena za pokój * ilosć dni + zniżka za dzieci) * cena za sezon (sezon określany jako dzień zameldowania) 
+
+        public double CostRoom(Room room)
+        {
+            double costRoom = 0;
+
+            switch (room.NumberOfPeople())
+            {
+                case 1:
+                    costRoom = Contig.priceRoom1 * Days();
+                    break;
+                case 2:
+                    costRoom = Contig.priceRoom2 * Days();
+                    break;
+                case 3:
+                    costRoom = Contig.priceRoom3 * Days();
+                    break;
+                case 4:
+                    costRoom = Contig.priceRoom4 * Days();
+                    break;
+                case 5:
+                    costRoom = Contig.priceRoom5 * Days();
+                    break;
+                case 6:
+                    costRoom = Contig.priceRoom6 * Days();
+                    break;
+            }
+
+                 return costRoom;
+        }
+
+        public double CostSeason()
+        {
+            double costSeason = 0;
+
+            if (checkInDate >= Contig.mediumSeasonStart && checkInDate <= Contig.mediumSeasonFinish)
+                costSeason = Contig.priceOfMediumSeason;
+            else if (checkInDate >= Contig.mediumSeasonFinish && checkInDate <= Contig.highSeasonFinish)
+                costSeason = Contig.priceOfHighSeason;
+            else if (checkInDate >= Contig.specialSeasonStart && checkInDate <= Contig.specialSeasonFinish)
+                costSeason = Contig.priceOfSpecialSeason;
+            else
+                costSeason = Contig.priceOfLowSeason;
+
+                return costSeason;
+        }
+        
+        public double Cost()
+        {
+            double cost = 0;
+            foreach (Room room in rooms)
+            {
+                cost = cost + CostRoom(room);      
+            }
+
+            return ((cost/NumberOfPeople()) * numberOfAdults * Contig.priceForPerson + (cost / NumberOfPeople()) * numberOfChildren * Contig.priceForChild + (cost / NumberOfPeople()) * numberOfBabies * Contig.priceForBabies) * CostSeason();
+        }
+
+        public void CheckIn()
+        { 
+            this.isCheckIn = true;
+        }
+
+        public int Advance()
+        {
+            return (int)(Cost() * Contig.priceAdvances);
+        }
+
+
+
+
+
 
         // To string 
 
@@ -94,12 +166,12 @@ namespace Project
 
             foreach (Room room in rooms)
             {
-                builder.AppendLine(room.ToString());
+                builder.AppendLine(room.ToString() + " Cost Room: " + CostRoom(room));
             }
 
             builder.AppendLine("Check-in date: " + this.checkInDate + "  Check-out date: " + this.checkOutDate);
-            builder.AppendLine("Is check-in: " + this.isCheckIn + "  Is check-out: " + this.isCheckOut + "  Is advance paid: " + this.isAdvancePaid);
-            builder.AppendLine("Quantity of days: " + Days());
+            builder.AppendLine("Is check-in: " + this.isCheckIn + "  Is check-out: " + this.isCheckOut + "  Advance: " + Advance() + "  Is Advance paid: " + this.isAdvancePaid);
+            builder.AppendLine("Quantity of days: " + Days() + " Cost Season: " + CostSeason() + "  Cost of reservation: " + Cost());
 
             return builder.ToString();
         }

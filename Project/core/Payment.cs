@@ -8,7 +8,11 @@ namespace Project
 {
     class Payment
     {
-        private Client client; 
+        private Client client;
+        private List<SinglePayment> singlePayments;
+
+
+        
 
     }
 }
