@@ -129,7 +129,7 @@ namespace Project
                 return costSeason;
         }
         
-        public double Cost()
+        internal double Cost()
         {
             double cost = 0;
             foreach (Room room in rooms)
@@ -161,7 +161,7 @@ namespace Project
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.AppendLine("Client: " + this.client);
+            builder.AppendLine(this.client.ToString());
             builder.Append("Room:  ");
 
             foreach (Room room in rooms)
