@@ -22,7 +22,7 @@ namespace Project
             //Console.WriteLine(client1);
             //Console.WriteLine();
 
-            Room room1 = new Room(1, 1, 1, false, true);
+            Room room1 = new Room(1, 1, 1, false, false);
             //Console.WriteLine(room1.NumberOfPeople());
             //Console.WriteLine();
 
@@ -34,21 +34,37 @@ namespace Project
             //Console.WriteLine(singlePayment1);
             //Console.WriteLine();
 
-            // COŚ JEST BŁĘDNIE W REZERWACJI NIE DZIAŁA POKÓJ
             Reservation reservation1 = new Reservation(client1, "2019/06/12", "2019/06/21", 3, 1, 0, false, false, true);
             //Console.WriteLine(reservation1);
             //Console.WriteLine();
 
+            Console.WriteLine("-----------------RESERVATION--------------------------------");
             reservation1.AddRoom(room1);
             reservation1.AddRoom(room2);
             Console.WriteLine(reservation1);
             Console.WriteLine();
 
+            Console.WriteLine("-----------------PAYMENT--------------------------------");
             Payment payment1 = new Payment(client1);
             payment1.AddSinglePayment(singlePayment1);
             payment1.AddReserwation(reservation1);
 
             Console.WriteLine(payment1);
+            Console.WriteLine();
+
+            Console.WriteLine("-----------------HOTEL--------------------------------");
+            Hotel hotel1 = new Hotel();
+            hotel1.AddReserwation(reservation1);
+            hotel1.CancelReservation(reservation1);
+            hotel1.AddRoom(room1);
+            hotel1.AddRoom(room2);
+
+            hotel1.DirtyFreeRooms();
+
+            Console.WriteLine(hotel1);
+
+
+
 
             Console.ReadLine();
         }

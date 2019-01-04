@@ -150,10 +150,13 @@ namespace Project
             return (int)(Cost() * Contig.priceAdvances);
         }
 
-
-
-
-
+        public void IsBusy()
+        {
+            foreach(Room room in rooms)
+            {
+                room.IsFree = false;
+            }
+        }
 
         // To string 
 
