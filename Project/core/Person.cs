@@ -48,7 +48,7 @@ namespace Project
             get { return iDNumber; }
             set
             {
-                if (!validateID_number(value))
+                if (!ValidateID_number(value))
                     throw new WrongIDNumberException(value);
                 iDNumber = value;
             }
@@ -59,7 +59,7 @@ namespace Project
             get { return phone; }
             set
             {
-                if (!validatePhone(value))
+                if (!ValidatePhone(value))
                     throw new WrongPhoneException(value);
                 phone = value;
             }
@@ -67,18 +67,11 @@ namespace Project
 
         public Sex Sex { get => sex; set => sex = value; }
 
-        // To string 
-
-        public override string ToString()
-        {
-            return this.name + " " + this.surname + " " + this.phone + " " + this.sex + " " + this.iDNumber;
-        }
-
-        // Metody ddatkowe
+        // Metody dodatkowe - sprawdzające poprawność
 
         private static readonly Regex ID_numberRegex = new Regex(@"([A-Z]{3})(\s)(\d{6})");
 
-        private static bool validateID_number(string iD_number)
+        private static bool ValidateID_number(string iD_number)
         {
             Match match = ID_numberRegex.Match(iD_number);
 
@@ -89,13 +82,20 @@ namespace Project
 
         private static readonly Regex PhoneRegex = new Regex(@"(\d{3}-\d{3}-\d{3})");
 
-        private static bool validatePhone(string phone)
+        private static bool ValidatePhone(string phone)
         {
             Match match = PhoneRegex.Match(phone);
 
             if (!match.Success)
                 return false;
             return true;
+        }
+
+        // To string 
+
+        public override string ToString()
+        {
+            return this.name + " " + this.surname + " " + this.phone + " " + this.sex + " " + this.iDNumber;
         }
     }
 }

@@ -46,6 +46,12 @@ namespace Project
             //}
         }
 
+        public void RestoreReservations(Reservation reservation)
+        {
+            reservations.Add(reservation);
+            cancelingReservations.Remove(reservation);
+        }
+
         public void AddReserwation(Reservation reservation)
         {
             reservations.Add(reservation);
@@ -60,6 +66,25 @@ namespace Project
         {
             return this.rooms.FindAll(r => r.IsClear == false && r.IsFree == true);
         }
+
+        //public List<Room> FreeRooms(DateTime checkIn, DateTime checkOut)
+        //{
+
+        //}
+
+        public void Cleaned(int roomNumber)
+        {
+            rooms.Find(r => r.RoomNumber == roomNumber).IsClear = true;
+        }
+
+        public void CancelReservationAfter2Days(Reservation reservation)
+        {
+            CancelReservation(reservations.Find(r => r.CheckInDate.AddDays(2) == DateTime.Now && r.IsCheckIn == false));
+        }
+
+        //public void ExtendReservations(DateTime date, Reservation reservation)
+        //{
+        //}
 
         // To string
 

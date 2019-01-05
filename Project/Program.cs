@@ -22,7 +22,7 @@ namespace Project
             //Console.WriteLine(client1);
             //Console.WriteLine();
 
-            Room room1 = new Room(1, 1, 1, false, false);
+            Room room1 = new Room(1, 0, 1, false, false);
             //Console.WriteLine(room1.NumberOfPeople());
             //Console.WriteLine();
 
@@ -34,7 +34,7 @@ namespace Project
             //Console.WriteLine(singlePayment1);
             //Console.WriteLine();
 
-            Reservation reservation1 = new Reservation(client1, "2019/06/12", "2019/06/21", 3, 1, 0, false, false, true);
+            Reservation reservation1 = new Reservation(client1, "2019/06/30", "2019/07/02", 2, 1, 0, false, false, true);
             //Console.WriteLine(reservation1);
             //Console.WriteLine();
 
@@ -48,6 +48,7 @@ namespace Project
             Payment payment1 = new Payment(client1);
             payment1.AddSinglePayment(singlePayment1);
             payment1.AddReserwation(reservation1);
+            payment1.AddAdvance(reservation1);
 
             Console.WriteLine(payment1);
             Console.WriteLine();
@@ -60,6 +61,8 @@ namespace Project
             hotel1.AddRoom(room2);
 
             hotel1.DirtyFreeRooms();
+            hotel1.Cleaned(1);
+
 
             Console.WriteLine(hotel1);
 

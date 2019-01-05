@@ -41,6 +41,13 @@ namespace Project
         public double Quantity { get => quantity; set => quantity = value; }
         public bool IsPaid { get => isPaid; set => isPaid = value; }
 
+        // Metody dodatkowe
+
+        public virtual double Cost()
+        {
+            return quantity * price;
+        }
+
         // To string
 
         public override string ToString()
@@ -48,12 +55,6 @@ namespace Project
             return this.Name + "  Quantity: " + this.Quantity + "  Price: " + this.Price + "  Cost: " + Cost().ToString() + "  Is Paid: " + this.IsPaid;
         }
 
-        // Metody dodatkowe
-
-        public virtual double Cost()
-        {
-            return quantity * price;
-        }
 
     }
 }
