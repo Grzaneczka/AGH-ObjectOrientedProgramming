@@ -71,6 +71,8 @@
     <Compile Include="core\Person.cs" />
     <Compile Include="core\Room.cs" />
     <Compile Include="core\Payment.cs" />
+    <Compile Include="core\Hotel.cs" />
+    <Compile Include="core\WrongCheckOutException.cs" />
     <Compile Include="core\sql.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="core\WrongEmailException.cs" />
     <Compile Include="core\SinglePayment.cs" />
     <Compile Include="core\Reservation.cs" />
+    <Compile Include="core\WrongCheckInException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

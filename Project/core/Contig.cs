@@ -32,6 +32,10 @@ namespace Project
         internal static double priceRoom5 = 150;
         internal static double priceRoom6 = 215;
 
+        internal static double priceGroups = 0.75;
+        internal static double priceLongStay = 0.8;
+
+
         internal static double priceAdvances = 0.05;
     }
 }

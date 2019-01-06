@@ -31,6 +31,23 @@ namespace Project
             singlePayments.Add(new SinglePayment("Reserwation", reservation.Cost(), 1, false, reservation.CheckInDate));
         }
 
+        public void AddAdvance(Reservation reservation)
+        {
+            singlePayments.Add(new SinglePayment("Advance", reservation.Advance(), 1, false, DateTime.Now));
+        }
+
+        public int GetCountOfNotPaiedSinglePayment()
+        {
+            return singlePayments.FindAll(sp => sp.IsPaid == false).Count();
+        }
+
+        public bool AdvanceIsPaid()
+        {
+            if (singlePayments.FindAll(sp => sp.Name == "Advance" && sp.IsPaid == true).Count() == singlePayments.FindAll(sp => sp.Name == "Advance").Count())
+                return true;
+            return false;
+        }
+
         // To string
 
         public override string ToString()
@@ -38,7 +55,7 @@ namespace Project
             StringBuilder builder = new StringBuilder();
 
             builder.AppendLine(this.client.ToString());
-            builder.Append("Single Payment:  ");
+            builder.AppendLine("Single Payment:  ");
 
             foreach (SinglePayment singlePayment in singlePayments)
             {

@@ -8,12 +8,13 @@ namespace Project
 {
     class Room
     {
-        int roomNumber;
-        int numberOfSingleBeds;
-        int numberOfMarriageBeds;
+        private int roomNumber;
+        private int numberOfSingleBeds;
+        private int numberOfMarriageBeds;
 
-        bool isBalcony;
-        bool isClear;
+        private bool isBalcony;
+        private bool isClear;
+        private bool isFree;
 
        // Konstruktory 
 
@@ -24,6 +25,7 @@ namespace Project
             this.numberOfMarriageBeds = numberOfMarriageBeds;
             this.isBalcony = isBalcony;
             this.isClear = isClear;
+            this.isFree = true;
         }
 
         // Getery i Setery 
@@ -38,13 +40,15 @@ namespace Project
 
         public bool IsClear { get => isClear; set => isClear = value; }
 
+        public bool IsFree { get => isFree; set => isFree = value; }
+
         // Metody dodatkowe
 
         public int NumberOfPeople()
         {
             return (numberOfSingleBeds * 1 + numberOfMarriageBeds * 2);
         }
-
+        
         // To string 
 
         public override string ToString()

@@ -25,24 +25,17 @@ namespace Project
             get { return email; }
             set
             {
-                if (!validateEmail(value))
+                if (!ValidateEmail(value))
                     throw new WrongEmailException(value);
                 email = value;
             }
-        }
-
-        // To string 
-
-        public override string ToString()
-        {
-            return "Client: " + FullName() + " " + this.ID_numer + " " + this.Phone + " " + this.Email;
         }
 
         // Metody sprawdzające poprawność
 
         private static readonly Regex EmailRegex = new Regex(@"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)");
 
-        private bool validateEmail(string email)
+        private bool ValidateEmail(string email)
         {
             Match match = EmailRegex.Match(email);
 
@@ -57,8 +50,17 @@ namespace Project
         {
             if (this.Sex == Sex.Man)
                 return (string)("Pan " + this.Name + " " + this.Surname);
-            else
+            else if (this.Sex == Sex.Woman)
                 return (string)("Pani " + this.Name + " " + this.Surname);
+            else 
+                return (string)("Firma " + this.Name + " " + this.Surname);
+        }
+
+        // To string 
+
+        public override string ToString()
+        {
+            return "Client: " + FullName() + " " + this.ID_numer + " " + this.Phone + " " + this.Email;
         }
     }
 }
