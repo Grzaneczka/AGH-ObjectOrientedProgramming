@@ -31,7 +31,7 @@ namespace Project
             this.Price = price;
             this.Quantity = quantity;
             this.IsPaid = isPaid;
-            this.date = DateTime.Now;
+            this.date = date;
         }
 
         // Getery i Setery 

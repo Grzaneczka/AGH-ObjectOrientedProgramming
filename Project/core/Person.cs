@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    public enum Sex { Woman, Man, Company }
+    public enum Sex { Woman, Man, Company, Unknown }
 
     class Person
     {
