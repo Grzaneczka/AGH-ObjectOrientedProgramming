@@ -146,7 +146,7 @@ namespace Project
             return AllRooms;
         }
 
-        public static List<SinglePayment> ConvertToSinglePaiment(List<List<string>> table)
+        public static List<SinglePayment> ConvertToSinglePayment(List<List<string>> table)
         {
             List<SinglePayment> Allpayments = new List<SinglePayment>();
 

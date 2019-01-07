@@ -55,14 +55,9 @@ namespace Project
             */
 
             /* SQL test */
-            List<Employee> AllEmployees = Sql.LoadAllEmployees();
-            foreach(Employee employee in AllEmployees)
-            {
-                Console.WriteLine(employee.ToString());
-            }
 
             List<List<string>> querry_output = Sql.ExecuteSelectQuerry("SELECT * FROM Employees");
-            AllEmployees = Sql.ConvertToEmployee(querry_output);
+            List<Employee> AllEmployees = Sql.ConvertToEmployee(querry_output);
             foreach (Employee employee in AllEmployees)
             {
                 Console.WriteLine(employee.ToString());
@@ -80,6 +75,13 @@ namespace Project
             foreach (Room room in AllRooms)
             {
                 Console.WriteLine(room.ToString());
+            }
+
+            List<List<string>> querry_output4 = Sql.ExecuteSelectQuerry("SELECT * FROM SinglePayment");
+            List<SinglePayment> AllSinglePayments = Sql.ConvertToSinglePayment(querry_output4);
+            foreach (SinglePayment single_payment in AllSinglePayments)
+            {
+                Console.WriteLine(single_payment.ToString());
             }
 
             Console.ReadLine();
