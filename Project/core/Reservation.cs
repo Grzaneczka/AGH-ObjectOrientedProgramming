@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class Reservation
+    class Reservation : ICloneable
     {
         private Client client;
         private List<Room> rooms;
@@ -84,8 +84,44 @@ namespace Project
             rooms.Remove(room);
         }
 
+        public int Advance()
+        {
+            return (int)(Cost() * Contig.priceAdvances);
+        }
+
+        public void CheckIn(Payment payment, Reservation reservation)
+        {
+            if (payment.AdvanceIsPaid(reservation.CheckInDate) == true)
+            {
+                this.isCheckIn = true;
+
+                foreach (Room room in rooms)
+                {
+                    room.IsFree = false;
+                }
+            }
+            else
+                throw new WrongCheckInException();
+        }
+
+        public void CheckOut(Payment payment)
+        {
+            if (payment.GetCountOfNotPaiedSinglePayment() == 0)
+            {
+                this.IsCheckOut = true;
+
+                foreach (Room room in rooms)
+                {
+                    room.IsFree = true;
+                    room.IsClear = false;
+                }
+            }
+            else
+                throw new WrongCheckOutException();
+        }
+
         // Cena wyliczana ze wzoru = ((Cena pokoju * Wskaźnik sezonu) * Ilość dzni) + zniżka za dzieci. Eventualnei Cena jest obliżana dla grup lub dla pobytu minimum 2 tygodnie.
-        
+
         public double CostSeason(DateTime date)
         {
             double costSeason = 0;
@@ -161,42 +197,6 @@ namespace Project
             return cost;
         }
 
-        public int Advance()
-        {
-            return (int)(Cost() * Contig.priceAdvances);
-        }
-
-        public void CheckIn(Payment payment)
-        {
-            if (payment.AdvanceIsPaid() == true)
-            {
-                this.isCheckIn = true;
-
-                foreach (Room room in rooms)
-                {
-                    room.IsFree = false;
-                }
-            }
-            else
-                throw new WrongCheckInException();
-        }
-
-        public void CheckOut(Payment payment)
-        {
-            if (payment.GetCountOfNotPaiedSinglePayment() == 0)
-            {
-                this.IsCheckOut = true;
-
-                foreach (Room room in rooms)
-                {
-                    room.IsFree = true;
-                    room.IsClear = false;
-                }
-            }
-            else
-                throw new WrongCheckOutException();
-        }
-
         // To string 
 
         public override string ToString()
@@ -217,6 +217,10 @@ namespace Project
 
             return builder.ToString();
         }
-       
+
+        public object Clone()
+        {
+            return (Reservation) this.MemberwiseClone();
+        }
     }
 }

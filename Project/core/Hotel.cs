@@ -38,12 +38,11 @@ namespace Project
         {
             reservations.Remove(reservation);
             cancelingReservations.Add(reservation);
+        }
 
-            //TimeSpan days = reservation.CheckInDate -  DateTime.Now;
-            //if(days.TotalDays >= 14)
-            //{
-
-            //}
+        public void CancelReservationAfter2Days(Reservation reservation)
+        {
+            CancelReservation(reservations.Find(r => r.CheckInDate.AddDays(2) == DateTime.Now && r.IsCheckIn == false));
         }
 
         public void RestoreReservations(Reservation reservation)
@@ -51,7 +50,7 @@ namespace Project
             reservations.Add(reservation);
             cancelingReservations.Remove(reservation);
         }
-
+                
         public void AddReserwation(Reservation reservation)
         {
             reservations.Add(reservation);
@@ -77,11 +76,7 @@ namespace Project
             rooms.Find(r => r.RoomNumber == roomNumber).IsClear = true;
         }
 
-        public void CancelReservationAfter2Days(Reservation reservation)
-        {
-            CancelReservation(reservations.Find(r => r.CheckInDate.AddDays(2) == DateTime.Now && r.IsCheckIn == false));
-        }
-
+        // Przedłużenie rezerwacji
         //public void ExtendReservations(DateTime date, Reservation reservation)
         //{
         //}

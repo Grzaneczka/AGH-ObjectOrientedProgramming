@@ -7,15 +7,22 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class Client : Person
+    class Client : Person, IComparable
     {
+        private static int idClient;
         private string email;
 
         // Konstruktory 
 
+        static Client()
+        {
+            idClient = 1;
+        }
+
         public Client(string name, string surname, string phone, Sex sex, string email, string idNumber) : base(name, surname, sex, phone, idNumber)
         {
             this.Email = email;
+            idClient = idClient++;
         }
 
         // Getery i Setery 
@@ -29,6 +36,11 @@ namespace Project
                     throw new WrongEmailException(value);
                 email = value;
             }
+        }
+
+        public int IdClient
+        {
+            get { return idClient; }
         }
 
         // Metody sprawdzające poprawność
@@ -62,5 +74,22 @@ namespace Project
         {
             return "Client: " + FullName() + " " + this.ID_numer + " " + this.Phone + " " + this.Email;
         }
+
+        public int CompareTo(object obj)
+        {
+            Client client = obj as Client;
+
+            if (obj is Client clientobj && client != null)
+            {
+                if (Surname.CompareTo(client.Surname) != 0)
+                    return Surname.CompareTo(client.Surname);
+                else if ((Name.CompareTo(client.Name) != 0))
+                    return Name.CompareTo(client.Name);
+                else
+                    return idClient.CompareTo(client.IdClient);
+            }
+            return 0;
+        }
+
     }
 }

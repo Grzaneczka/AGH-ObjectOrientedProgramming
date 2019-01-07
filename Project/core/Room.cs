@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class Room
+    class Room : ICloneable
     {
         private int roomNumber;
         private int numberOfSingleBeds;
@@ -42,12 +42,17 @@ namespace Project
 
         public bool IsFree { get => isFree; set => isFree = value; }
 
+        public object Clone()
+        {
+            return (Room)this.MemberwiseClone();
+        }
+
         // Metody dodatkowe
 
         public int NumberOfPeople()
         {
             return (numberOfSingleBeds * 1 + numberOfMarriageBeds * 2);
-        }
+        } 
         
         // To string 
 

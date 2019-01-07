@@ -9,7 +9,7 @@ namespace Project
 {
     public enum Sex { Woman, Man, Company }
 
-    class Person
+    class Person : IComparable<Person>
     {
 
         private string name;
@@ -66,6 +66,16 @@ namespace Project
         }
 
         public Sex Sex { get => sex; set => sex = value; }
+       
+        // Metoda porównująca 
+
+        public int CompareTo(Person other)
+        {
+            if (this.surname == other.surname)
+                return this.surname.CompareTo(other.surname);
+            else
+                return this.name.CompareTo(other.name);
+        }
 
         // Metody dodatkowe - sprawdzające poprawność
 
@@ -97,5 +107,6 @@ namespace Project
         {
             return this.name + " " + this.surname + " " + this.phone + " " + this.sex + " " + this.iDNumber;
         }
+
     }
 }

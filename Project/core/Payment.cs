@@ -28,12 +28,14 @@ namespace Project
 
         public void AddReserwation(Reservation reservation)
         {
-            singlePayments.Add(new SinglePayment("Reserwation", reservation.Cost(), 1, false, reservation.CheckInDate));
+            string name = "Reservation form " + reservation.CheckInDate.ToString();
+            singlePayments.Add(new SinglePayment(name, reservation.Cost(), 1, false, reservation.CheckInDate));
         }
 
         public void AddAdvance(Reservation reservation)
         {
-            singlePayments.Add(new SinglePayment("Advance", reservation.Advance(), 1, false, DateTime.Now));
+            string name = "Advance for reservations from " + reservation.CheckInDate.ToString();
+            singlePayments.Add(new SinglePayment(name, reservation.Advance(), 1, false, DateTime.Now));
         }
 
         public int GetCountOfNotPaiedSinglePayment()
@@ -41,9 +43,10 @@ namespace Project
             return singlePayments.FindAll(sp => sp.IsPaid == false).Count();
         }
 
-        public bool AdvanceIsPaid()
+        public bool AdvanceIsPaid(DateTime date)
         {
-            if (singlePayments.FindAll(sp => sp.Name == "Advance" && sp.IsPaid == true).Count() == singlePayments.FindAll(sp => sp.Name == "Advance").Count())
+            string name = "Advance for reservations from " + date.ToString();
+            if(singlePayments.Find(sp => sp.Name == name).IsPaid == true)
                 return true;
             return false;
         }

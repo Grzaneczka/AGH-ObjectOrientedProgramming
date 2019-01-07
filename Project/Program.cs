@@ -22,9 +22,14 @@ namespace Project
             //Console.WriteLine(client1);
             //Console.WriteLine();
 
+            Console.WriteLine("-----------------RESERVATION--------------------------------");
             Room room1 = new Room(1, 0, 1, false, false);
             //Console.WriteLine(room1.NumberOfPeople());
-            //Console.WriteLine();
+            Console.WriteLine();
+            Room room3 = (Room) room1.Clone();
+            room3.RoomNumber = 3;
+            Console.WriteLine(room1);
+            Console.WriteLine(room3);
 
             Room room2 = new Room(2, 1, 0, false, true);
             //Console.WriteLine(room2.NumberOfPeople());
@@ -38,33 +43,33 @@ namespace Project
             //Console.WriteLine(reservation1);
             //Console.WriteLine();
 
-            Console.WriteLine("-----------------RESERVATION--------------------------------");
-            reservation1.AddRoom(room1);
-            reservation1.AddRoom(room2);
-            Console.WriteLine(reservation1);
-            Console.WriteLine();
+            //Console.WriteLine("-----------------RESERVATION--------------------------------");
+            //reservation1.AddRoom(room1);
+            //reservation1.AddRoom(room2);
+            //Console.WriteLine(reservation1);
+            //Console.WriteLine();
 
-            Console.WriteLine("-----------------PAYMENT--------------------------------");
-            Payment payment1 = new Payment(client1);
-            payment1.AddSinglePayment(singlePayment1);
-            payment1.AddReserwation(reservation1);
-            payment1.AddAdvance(reservation1);
+            //Console.WriteLine("-----------------PAYMENT--------------------------------");
+            //Payment payment1 = new Payment(client1);
+            //payment1.AddSinglePayment(singlePayment1);
+            //payment1.AddReserwation(reservation1);
+            //payment1.AddAdvance(reservation1);
 
-            Console.WriteLine(payment1);
-            Console.WriteLine();
+            //Console.WriteLine(payment1);
+            //Console.WriteLine();
 
-            Console.WriteLine("-----------------HOTEL--------------------------------");
-            Hotel hotel1 = new Hotel();
-            hotel1.AddReserwation(reservation1);
-            hotel1.CancelReservation(reservation1);
-            hotel1.AddRoom(room1);
-            hotel1.AddRoom(room2);
+            //Console.WriteLine("-----------------HOTEL--------------------------------");
+            //Hotel hotel1 = new Hotel();
+            //hotel1.AddReserwation(reservation1);
+            //hotel1.CancelReservation(reservation1);
+            //hotel1.AddRoom(room1);
+            //hotel1.AddRoom(room2);
 
-            hotel1.DirtyFreeRooms();
-            hotel1.Cleaned(1);
+            //hotel1.DirtyFreeRooms();
+            //hotel1.Cleaned(1);
 
 
-            Console.WriteLine(hotel1);
+            //Console.WriteLine(hotel1);
 
 
 
