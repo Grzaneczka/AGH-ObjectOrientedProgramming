@@ -42,18 +42,18 @@ namespace Project
 
         public bool IsFree { get => isFree; set => isFree = value; }
 
-        public object Clone()
-        {
-            return (Room)this.MemberwiseClone();
-        }
-
         // Metody dodatkowe
 
         public int NumberOfPeople()
         {
             return (numberOfSingleBeds * 1 + numberOfMarriageBeds * 2);
-        } 
-        
+        }
+
+        public object Clone()
+        {
+            return (Room)this.MemberwiseClone();
+        }
+
         // To string 
 
         public override string ToString()

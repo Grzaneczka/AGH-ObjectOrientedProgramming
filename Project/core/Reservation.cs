@@ -120,6 +120,7 @@ namespace Project
                 throw new WrongCheckOutException();
         }
 
+      
         // Cena wyliczana ze wzoru = ((Cena pokoju * Wskaźnik sezonu) * Ilość dzni) + zniżka za dzieci. Eventualnei Cena jest obliżana dla grup lub dla pobytu minimum 2 tygodnie.
 
         public double CostSeason(DateTime date)

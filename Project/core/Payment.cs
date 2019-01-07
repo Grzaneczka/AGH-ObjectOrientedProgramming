@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class Payment
+    class Payment : IEquatable<Client>
+
     {
         private Client client;
         private List<SinglePayment> singlePayments;
@@ -20,6 +21,17 @@ namespace Project
         }
 
         // Metody dodatkowe
+
+        public bool Equals(Client other)
+        {
+            if (this.client.Name != other.Name) return false;
+
+            if (this.client.Surname != other.Surname) return false;
+
+            if (this.client.IdClient != other.IdClient) return false;
+
+            return true;
+        }
 
         public void AddSinglePayment(SinglePayment singlePayment)
         {

@@ -66,10 +66,13 @@ namespace Project
             return this.rooms.FindAll(r => r.IsClear == false && r.IsFree == true);
         }
 
-        //public List<Room> FreeRooms(DateTime checkIn, DateTime checkOut)
-        //{
+        public List<Reservation> FreeRooms(DateTime checkIn, DateTime checkOut)
+        {
+           return reservations.FindAll(r => r.CheckOutDate >= checkIn || r.CheckInDate <= checkOut);  // Rezerwacja pokoi w tym terminie 
+            
+            // Z powyższych rezerwacji wyciągnąć listę pokoju a następnie znaleźć pokoje nie należące do tej listy => Te są wolne
 
-        //}
+        }
 
         public void Cleaned(int roomNumber)
         {
