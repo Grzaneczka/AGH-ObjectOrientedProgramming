@@ -9,69 +9,92 @@ namespace Project
     class Hotel
     {
         private string name;
-        private List<Reservation> cancelingReservations;
         private List<Reservation> reservations;
         private List<Room> rooms;
-
+        private List<Client> clients;
+        private List<Employee> employees;
+        
         // Konstruktory 
 
-        public Hotel()
+        public Hotel(string name)
         {
-            this.Name = null;
+            this.Name =  name;
             this.reservations = new List<Reservation>();
-            this.cancelingReservations = new List<Reservation>();
             this.rooms = new List<Room>();
-        }
-
-        public Hotel(string name) : this()
-        {
-            this.Name = name;
+            this.clients = new List<Client>();
+            this.employees = new List<Employee>();
         }
 
         // Getery i setery 
 
         public string Name { get => name; set => name = value; }
 
-        // Metody dodatkowe
+        internal List<Reservation> Reservations { get => reservations; set => reservations = value; }
 
-        public void CancelReservation(Reservation reservation)
-        {
-            reservations.Remove(reservation);
-            cancelingReservations.Add(reservation);
-        }
+        internal List<Room> Rooms { get => rooms; set => rooms = value; }
 
-        public void CancelReservationAfter2Days(Reservation reservation)
-        {
-            CancelReservation(reservations.Find(r => r.CheckInDate.AddDays(2) == DateTime.Now && r.IsCheckIn == false));
-        }
+        internal List<Client> Clients { get => clients; set => clients = value; }
 
-        public void RestoreReservations(Reservation reservation)
+        internal List<Employee> Employees { get => employees; set => employees = value; }
+
+        // Metody dodatkowe => dotyczące rezerwacji 
+
+        public Reservation CreateReserwation(string title, Client client, string checkInDate, string checkOutDate, int numberOfAdults, int numberOfChildren, int numberOfBabies)
         {
+            Reservation reservation = new Reservation(title, client, checkInDate, checkOutDate, numberOfAdults, numberOfChildren, numberOfBabies, false, false, false);
             reservations.Add(reservation);
-            cancelingReservations.Remove(reservation);
-        }
-                
-        public void AddReserwation(Reservation reservation)
-        {
-            reservations.Add(reservation);
+            client.AddPayment(reservation);
+            return reservation;
         }
 
-        public void AddRoom(Room room)
+        public bool ExtendReservations(DateTime date, Reservation reservation)
         {
+            bool canBeExtended = reservation.Rooms.All(room => !IsRoomReserved(room, reservation.CheckOutDate, date));
+
+            if (!canBeExtended)
+                return false;
+
+            reservation.CheckOutDate = date;
+            return true;
+        }
+
+        public List<Reservation> CanceledReservations()
+        {
+            return reservations.FindAll(r => r.Canceled);
+        }
+
+        public void CancelReservationsAfter2Days()
+        {
+            reservations
+                .FindAll(r => r.CheckInDate.AddDays(Config.AUTOMATIC_CANCEL_DAYS) < DateTime.Now && !r.IsCheckIn && !r.Canceled)
+                .ForEach(r => r.Canceled = true);
+        }
+
+        // Metody dodatkowe => dotyczące pokoju 
+
+        public Room CreateRoom(int roomNumber, int numberOfSingleBeds, int numberOfMarriageBeds, bool isBalcony)
+        {
+            Room room = new Room(roomNumber, numberOfSingleBeds, numberOfMarriageBeds, isBalcony, false);
             rooms.Add(room);
+            return room;
         }
-
+        
         public List<Room> DirtyFreeRooms()
         {
-            return this.rooms.FindAll(r => r.IsClear == false && r.IsFree == true);
+            return this.rooms.FindAll(r => !r.IsClear && !r.IsFree);
         }
 
-        public List<Reservation> FreeRooms(DateTime checkIn, DateTime checkOut)
+        public bool IsRoomReserved(Room room, DateTime checkIn, DateTime checkOut)
         {
-           return reservations.FindAll(r => r.CheckOutDate >= checkIn || r.CheckInDate <= checkOut);  // Rezerwacja pokoi w tym terminie 
-            
-            // Z powyższych rezerwacji wyciągnąć listę pokoju a następnie znaleźć pokoje nie należące do tej listy => Te są wolne
+            return reservations
+                .Where(r => r.Rooms.Contains(room))
+                .Where(r => !(checkOut <= r.CheckInDate || r.CheckOutDate <= checkIn))
+                .Count() > 0;
+        }
 
+        public List<Room> FreeRooms(DateTime checkIn, DateTime checkOut)
+        {
+            return rooms.FindAll(room => IsRoomReserved(room, checkIn, checkOut));
         }
 
         public void Cleaned(int roomNumber)
@@ -79,10 +102,23 @@ namespace Project
             rooms.Find(r => r.RoomNumber == roomNumber).IsClear = true;
         }
 
-        // Przedłużenie rezerwacji
-        //public void ExtendReservations(DateTime date, Reservation reservation)
-        //{
-        //}
+        // Metody dodatkowe => dotyczące clienta
+
+        public Client CreateClient(string name, string surname, string phone, Sex sex, string email, string idNumber)
+        {
+            Client client = new Client(name, surname, phone, sex, email, idNumber);
+            clients.Add(client);
+            return client;
+        }
+
+        // Metody dodatkowe => dotyczące pracownika
+
+        public Employee CreateEmplyee(string name, string surname, string phone, Sex sex, string function)
+        {
+            Employee employee = new Employee(name, surname, phone, sex, function);
+            employees.Add(employee);
+            return employee;
+        }
 
         // To string
 

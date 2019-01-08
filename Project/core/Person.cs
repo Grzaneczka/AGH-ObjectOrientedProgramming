@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    public enum Sex { Woman, Man, Company }
+    public enum Sex { Woman, Man }
 
-    class Person : IComparable<Person>
+    abstract class Person : IComparable<Person>
     {
 
         private string name;
@@ -32,9 +32,9 @@ namespace Project
             this.Phone = phone;
         }
 
-        public Person(string name, string surname, Sex sex, string phone, string iD_number) : this(name, surname, sex, phone)
+        public Person(string name, string surname, Sex sex, string phone, string idNumber) : this(name, surname, sex, phone)
         {
-            this.ID_numer = iD_number;
+            this.IDNumer = idNumber;
         }
 
         // Getery i setery 
@@ -43,12 +43,12 @@ namespace Project
 
         public string Surname { get => surname; set => surname = value; }
 
-        public string ID_numer
+        public string IDNumer
         {
             get { return iDNumber; }
             set
             {
-                if (!ValidateID_number(value))
+                if (!ValidateIDNumber(value))
                     throw new WrongIDNumberException(value);
                 iDNumber = value;
             }
@@ -72,33 +72,25 @@ namespace Project
         public int CompareTo(Person other)
         {
             if (this.surname == other.surname)
-                return this.surname.CompareTo(other.surname);
-            else
                 return this.name.CompareTo(other.name);
+            else
+                return this.surname.CompareTo(other.surname);
         }
 
         // Metody dodatkowe - sprawdzające poprawność
 
-        private static readonly Regex ID_numberRegex = new Regex(@"([A-Z]{3})(\s)(\d{6})");
+        private static readonly Regex ID_NUMBER_REGEX = new Regex(@"([A-Z]{3})(\s)(\d{6})");
 
-        private static bool ValidateID_number(string iD_number)
+        private static bool ValidateIDNumber(string iD_number)
         {
-            Match match = ID_numberRegex.Match(iD_number);
-
-            if (!match.Success)
-                return false;
-            return true;
+            return ID_NUMBER_REGEX.Match(iD_number).Success;
         }
 
-        private static readonly Regex PhoneRegex = new Regex(@"(\d{3}-\d{3}-\d{3})");
+        private static readonly Regex PHONE_REGEX = new Regex(@"(\d{3}-\d{3}-\d{3})");
 
         private static bool ValidatePhone(string phone)
         {
-            Match match = PhoneRegex.Match(phone);
-
-            if (!match.Success)
-                return false;
-            return true;
+            return PHONE_REGEX.Match(phone).Success;
         }
 
         // To string 

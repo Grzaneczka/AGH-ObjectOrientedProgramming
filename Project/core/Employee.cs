@@ -8,7 +8,7 @@ namespace Project
 {
     class Employee : Person
     {
-        string function;
+        private string function;
 
         // Konstruktory 
 

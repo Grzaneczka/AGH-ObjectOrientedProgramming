@@ -6,44 +6,28 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class SinglePayment
+    class SinglePayment : Payment 
     {
-        private string name;
         private double price;
         private double quantity;
-        private bool isPaid;
-        private DateTime date;
 
         // Konstruktory 
 
-        public SinglePayment(string name, double price, double quantity, bool isPaid)
+        public SinglePayment(string title, double price, double quantity) : base(title)
         {
-            this.Name = name;
-            this.Price = price;
-            this.Quantity = quantity;
-            this.IsPaid = isPaid;
-            this.date = DateTime.Now;
+            this.price = price;
+            this.quantity = quantity;
         }
 
-        public SinglePayment(string name, double price, double quantity, bool isPaid, DateTime date) : this(name, price, quantity, isPaid)
-        {
-            this.Name = name;
-            this.Price = price;
-            this.Quantity = quantity;
-            this.IsPaid = isPaid;
-            this.date = DateTime.Now;
-        }
+        // Getery i Setery
 
-        // Getery i Setery 
-
-        public string Name { get => name; set => name = value; }
         public double Price { get => price; set => price = value; }
+
         public double Quantity { get => quantity; set => quantity = value; }
-        public bool IsPaid { get => isPaid; set => isPaid = value; }
 
         // Metody dodatkowe
 
-        public virtual double Cost()
+        public override double Amount()
         {
             return quantity * price;
         }
@@ -52,9 +36,8 @@ namespace Project
 
         public override string ToString()
         {
-            return this.Name + "  Quantity: " + this.Quantity + "  Price: " + this.Price + "  Cost: " + Cost().ToString() + "  Is Paid: " + this.IsPaid;
+            return base.ToString();
         }
-
 
     }
 }

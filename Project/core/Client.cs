@@ -7,22 +7,16 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class Client : Person, IComparable
+    class Client : Person
     {
-        private static int idClient;
         private string email;
+        private List<Payment> payments = new List<Payment>();
 
-        // Konstruktory 
-
-        static Client()
-        {
-            idClient = 1;
-        }
+        // Konstruktory
 
         public Client(string name, string surname, string phone, Sex sex, string email, string idNumber) : base(name, surname, sex, phone, idNumber)
         {
             this.Email = email;
-            idClient = idClient++;
         }
 
         // Getery i Setery 
@@ -38,10 +32,7 @@ namespace Project
             }
         }
 
-        public int IdClient
-        {
-            get { return idClient; }
-        }
+        internal List<Payment> Payments { get => payments; }
 
         // Metody sprawdzające poprawność
 
@@ -49,11 +40,7 @@ namespace Project
 
         private bool ValidateEmail(string email)
         {
-            Match match = EmailRegex.Match(email);
-
-            if (!match.Success)
-                return false;
-            return true;
+            return EmailRegex.Match(email).Success;
         }
          
         // Metody dodatkowe
@@ -62,33 +49,25 @@ namespace Project
         {
             if (this.Sex == Sex.Man)
                 return (string)("Pan " + this.Name + " " + this.Surname);
-            else if (this.Sex == Sex.Woman)
-                return (string)("Pani " + this.Name + " " + this.Surname);
             else 
-                return (string)("Firma " + this.Name + " " + this.Surname);
+                return (string)("Pani " + this.Name + " " + this.Surname);
+        }
+
+        public double PaymentStatus() // Nie jestem czy to jest dobrze 
+        {
+            return payments.FindAll(r => !r.IsPaid).Sum(r => r.Amount());
+        }
+
+        public void AddPayment(Payment payment)
+        {
+            payments.Add(payment);
         }
 
         // To string 
 
         public override string ToString()
         {
-            return "Client: " + FullName() + " " + this.ID_numer + " " + this.Phone + " " + this.Email;
-        }
-
-        public int CompareTo(object obj)
-        {
-            Client client = obj as Client;
-
-            if (obj is Client clientobj && client != null)
-            {
-                if (Surname.CompareTo(client.Surname) != 0)
-                    return Surname.CompareTo(client.Surname);
-                else if ((Name.CompareTo(client.Name) != 0))
-                    return Name.CompareTo(client.Name);
-                else
-                    return idClient.CompareTo(client.IdClient);
-            }
-            return 0;
+            return "Client: " + FullName() + " " + this.IDNumer + " " + this.Phone + " " + this.Email;
         }
 
     }

@@ -10,10 +10,7 @@ namespace Project
     {
         static void Main(string[] args)
         {
-            Person person1 = new Person("Adam", "Adamski", Sex.Man, "678-658-789", "DSC 234561");
-            //Console.WriteLine(person1);
-            //Console.WriteLine();
-
+          
             Employee employee1 = new Employee("Andzej", "Kosa", "768-987-234", Sex.Man, "Recepcjonista");
             //Console.WriteLine(employee1);
             //Console.WriteLine();
@@ -22,7 +19,7 @@ namespace Project
             //Console.WriteLine(client1);
             //Console.WriteLine();
 
-            Console.WriteLine("-----------------RESERVATION--------------------------------");
+            Console.WriteLine("-----------------ROOM--------------------------------");
             Room room1 = new Room(1, 0, 1, false, false);
             //Console.WriteLine(room1.NumberOfPeople());
             Console.WriteLine();
@@ -35,11 +32,7 @@ namespace Project
             //Console.WriteLine(room2.NumberOfPeople());
             //Console.WriteLine();
 
-            SinglePayment singlePayment1 = new SinglePayment("Kawusia", 11.69, 2, false);
-            //Console.WriteLine(singlePayment1);
-            //Console.WriteLine();
-
-            Reservation reservation1 = new Reservation(client1, "2019/06/30", "2019/07/02", 2, 1, 0, false, false, true);
+            Reservation reservation1 = new Reservation("Reservation 2019/06/30 - 2019/07/02" ,client1, "2019/06/30", "2019/07/02", 2, 1, 0, false, false, true);
             //Console.WriteLine(reservation1);
             //Console.WriteLine();
 
@@ -70,10 +63,7 @@ namespace Project
 
 
             //Console.WriteLine(hotel1);
-
-
-
-
+            
             Console.ReadLine();
         }
     }
