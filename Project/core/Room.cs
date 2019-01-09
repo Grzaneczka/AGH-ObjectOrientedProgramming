@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    [Serializable]
     class Room : ICloneable
     {
         private int roomNumber;

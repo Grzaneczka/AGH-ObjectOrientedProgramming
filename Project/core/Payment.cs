@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    [Serializable]
     class Payment
     {
         private DateTime date;
         private string title;
         private bool isPaid;
+        private double amount;
 
         //Konstruktory 
 
@@ -19,6 +21,7 @@ namespace Project
             this.date = DateTime.Now;
             this.title = title;
             this.isPaid = false;
+            this.amount = Amount();
         }
 
         //Getery i Setery

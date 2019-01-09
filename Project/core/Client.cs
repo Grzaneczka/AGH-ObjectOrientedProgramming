@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    [Serializable]
     class Client : Person
     {
         private string email;

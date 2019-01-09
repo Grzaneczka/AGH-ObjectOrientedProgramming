@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    [Serializable]
     class Reservation : Payment 
     {
 
@@ -40,9 +41,10 @@ namespace Project
             this.NumberOfBabies = NumberOfBabies;
             this.IsCheckIn = checkIn;
             this.IsCheckOut = checkOut;
+            this.Canceled = false;
             this.isAdvance = advance;
 
-            rooms = new List<Room>();
+            this.rooms = new List<Room>();
         }
 
         // Getery i setery 

@@ -9,6 +9,7 @@ namespace Project
 {
     public enum Sex { Woman, Man }
 
+    [Serializable]
     abstract class Person : IComparable<Person>
     {
 

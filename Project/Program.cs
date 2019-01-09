@@ -10,59 +10,21 @@ namespace Project
     {
         static void Main(string[] args)
         {
-          
-            Employee employee1 = new Employee("Andzej", "Kosa", "768-987-234", Sex.Man, "Recepcjonista");
-            //Console.WriteLine(employee1);
-            //Console.WriteLine();
+            Employee employee = new Employee("Karolina", "Grzanka","879-987-987", Sex.Woman, "Administrator");
 
-            Client client1 = new Client("Joanna", "Suwaj", "876-543-456", Sex.Woman, "joannasuwaj@gmail.com", "DGC 654329");
-            //Console.WriteLine(client1);
-            //Console.WriteLine();
+            Console.WriteLine("-----------------HOTEL--------------------------------");
 
-            Console.WriteLine("-----------------ROOM--------------------------------");
-            Room room1 = new Room(1, 0, 1, false, false);
-            //Console.WriteLine(room1.NumberOfPeople());
-            Console.WriteLine();
-            Room room3 = (Room) room1.Clone();
-            room3.RoomNumber = 3;
-            Console.WriteLine(room1);
-            Console.WriteLine(room3);
+            Hotel hotel = new Hotel("NAJLEPSZY HOTEL NA ŚWIACIE");
 
-            Room room2 = new Room(2, 1, 0, false, true);
-            //Console.WriteLine(room2.NumberOfPeople());
-            //Console.WriteLine();
+            Room room01 = hotel.CreateRoom(01, 0, 1, false, employee);
+            Room room02 = hotel.CreateRoom(02, 1, 1, false, employee);
 
-            Reservation reservation1 = new Reservation("Reservation 2019/06/30 - 2019/07/02" ,client1, "2019/06/30", "2019/07/02", 2, 1, 0, false, false, true);
-            //Console.WriteLine(reservation1);
-            //Console.WriteLine();
+            Client client = hotel.CreateClient("Jan", "Główka", "765-234-567", Sex.Man, "janglowka@add.asd", "RSE 654332", employee);
 
-            //Console.WriteLine("-----------------RESERVATION--------------------------------");
-            //reservation1.AddRoom(room1);
-            //reservation1.AddRoom(room2);
-            //Console.WriteLine(reservation1);
-            //Console.WriteLine();
+            hotel.CreateReserwation("Reservation room 1 28/09/2019 - 30/09/2019", client, "2019/09/28", "2019/09/30", 2, 0, 0, employee, room01);
+       
+            Console.WriteLine(hotel);
 
-            //Console.WriteLine("-----------------PAYMENT--------------------------------");
-            //Payment payment1 = new Payment(client1);
-            //payment1.AddSinglePayment(singlePayment1);
-            //payment1.AddReserwation(reservation1);
-            //payment1.AddAdvance(reservation1);
-
-            //Console.WriteLine(payment1);
-            //Console.WriteLine();
-
-            //Console.WriteLine("-----------------HOTEL--------------------------------");
-            //Hotel hotel1 = new Hotel();
-            //hotel1.AddReserwation(reservation1);
-            //hotel1.CancelReservation(reservation1);
-            //hotel1.AddRoom(room1);
-            //hotel1.AddRoom(room2);
-
-            //hotel1.DirtyFreeRooms();
-            //hotel1.Cleaned(1);
-
-
-            //Console.WriteLine(hotel1);
             
             Console.ReadLine();
         }
