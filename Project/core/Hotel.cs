@@ -13,21 +13,29 @@ namespace Project
     {
         private string name;
         private List<Reservation> reservations;
-        private List<Room> roomsH;
+        private List<Room> rooms;
         private List<Client> clients;
         private List<Employee> employees;
         private List<Log> logs;
-        
+        private List<Account> accounts;
+
         // Konstruktory 
 
-        public Hotel(string name)
+        public Hotel()
         {
-            this.Name =  name;
+            this.Name = null;
             this.reservations = new List<Reservation>();
-            this.roomsH = new List<Room>();
+            this.rooms = new List<Room>();
             this.clients = new List<Client>();
             this.employees = new List<Employee>();
             this.logs = new List<Log>();
+            this.accounts = new List<Account>();
+        }
+
+        public Hotel(string name): this()
+        {
+            this.Name =  name;
+            
         }
 
         // Getery i setery 
@@ -36,7 +44,7 @@ namespace Project
 
         internal List<Reservation> Reservations { get => reservations; set => reservations = value; }
 
-        internal List<Room> Rooms { get => roomsH; set => roomsH = value; }
+        internal List<Room> Rooms { get => rooms; set => rooms = value; }
 
         internal List<Client> Clients { get => clients; set => clients = value; }
 
@@ -44,14 +52,16 @@ namespace Project
 
         internal List<Log> Logs { get => logs; set => logs = value; }
 
+        internal List<Account> Accounts { get => accounts; set => accounts = value; }
+
         // Metody dodatkowe => dotyczące rezerwacji 
 
-        public Reservation CreateReserwation(string title, Client client, string checkInDate, string checkOutDate, int numberOfAdults, int numberOfChildren, int numberOfBabies, Employee employee, Room room)
+        public Reservation CreateReservation(string title, Client client, string checkInDate, string checkOutDate, int numberOfAdults, int numberOfChildren, int numberOfBabies, Employee employee, Room room)
         {
             Reservation reservation = new Reservation(title, client, checkInDate, checkOutDate, numberOfAdults, numberOfChildren, numberOfBabies, false, false, false);
             reservations.Add(reservation);
-            client.AddPayment(reservation);
             reservation.AddRoom(room);
+            accounts.Find(a => a.Client == client).AddPayment(reservation);
 
             string contents = "Create reservation: " + title;
             AddLog(employee, Type.Create_Reserwation, contents);
@@ -111,10 +121,15 @@ namespace Project
 
         public void ChecOut(Reservation reservation, Employee employee)
         {
-            reservation.CheckOut();
+            if (accounts.Find(a => a.Client == reservation.Client).AccountStatus() == 0)
+            {
+                reservation.CheckOut();
 
-            string contents = "Checki out reservation " + reservation.Title;
-            AddLog(employee, Type.Check_Out, contents);
+                string contents = "Checki out reservation " + reservation.Title;
+                AddLog(employee, Type.Check_Out, contents);
+            }
+            else
+                throw new WrongCheckOutException();
         }
 
         // Metody dodatkowe => dotyczące pokoju 
@@ -125,13 +140,13 @@ namespace Project
             AddLog(employee, Type.Create_Room, contents);
 
             Room room = new Room(roomNumber, numberOfSingleBeds, numberOfMarriageBeds, isBalcony, false);
-            roomsH.Add(room);
+            rooms.Add(room);
             return room;
         }
         
         public List<Room> DirtyFreeRooms()
         {
-            return this.roomsH.FindAll(r => !r.IsClear && !r.IsFree);
+            return this.rooms.FindAll(r => !r.IsClear && !r.IsFree);
         }
 
         public bool IsRoomReserved(Room room, DateTime checkIn, DateTime checkOut)
@@ -144,7 +159,7 @@ namespace Project
 
         public List<Room> FreeRooms(DateTime checkIn, DateTime checkOut)
         {
-            return roomsH.FindAll(room => IsRoomReserved(room, checkIn, checkOut));
+            return rooms.FindAll(room => IsRoomReserved(room, checkIn, checkOut));
         }
 
         public void Cleaned(int roomNumber, Employee employee)
@@ -152,7 +167,7 @@ namespace Project
             string contents = "Cleaned room " + roomNumber;
             AddLog(employee, Type.Cleaning, contents);
 
-            roomsH.Find(r => r.RoomNumber == roomNumber).IsClear = true;
+            rooms.Find(r => r.RoomNumber == roomNumber).IsClear = true;
         }
 
         // Metody dodatkowe => dotyczące clienta
@@ -164,6 +179,9 @@ namespace Project
 
             Client client = new Client(name, surname, phone, sex, email, idNumber);
             clients.Add(client);
+
+            CreateAccount(client);          
+
             return client;
         }
 
@@ -185,6 +203,17 @@ namespace Project
             logs.Add(log);
         }
 
+        // Metody dodatkowe => dotyczące rachunku 
+
+        public Account CreateAccount(Client client)
+        {
+            Account account = new Account(client);
+            accounts.Add(account);
+
+            return account;
+        }
+
+
         // To string
 
         public override string ToString()
@@ -201,7 +230,7 @@ namespace Project
 
             builder.AppendLine("Rooms:  ");
 
-            foreach (Room room in roomsH)
+            foreach (Room room in rooms)
             {
                 builder.AppendLine(room.ToString());
             }
@@ -224,6 +253,16 @@ namespace Project
             StreamWriter writer = new StreamWriter(name);
             serializer.Serialize(writer, hotel);
             writer.Close();
+        }
+
+        public static Hotel ReadXML(string name)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Hotel));
+            using (StreamReader reader = new StreamReader(name))
+            {
+                Hotel score = serializer.Deserialize(reader) as Hotel;
+                return score;
+            }
         }
     }
 }

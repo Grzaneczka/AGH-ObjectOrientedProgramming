@@ -12,7 +12,7 @@ namespace Project
     {
 
         private Client client;
-        private List<Room> rooms;
+        private List<Room> rooms = new List<Room>();
         private DateTime checkInDate;
         private DateTime checkOutDate;
 
@@ -44,7 +44,6 @@ namespace Project
             this.Canceled = false;
             this.isAdvance = advance;
 
-            this.rooms = new List<Room>();
         }
 
         // Getery i setery 
@@ -114,18 +113,14 @@ namespace Project
 
         public void CheckOut() 
         {
-            if (client.PaymentStatus() ==  0)  
-            {
-                this.IsCheckOut = true;
+            this.IsCheckOut = true;
 
-                foreach (Room room in rooms)
-                {
-                    room.IsFree = true;
-                    room.IsClear = false;
-                }
+            foreach (Room room in rooms)
+            {
+                room.IsFree = true;
+                room.IsClear = false;
             }
-            else
-                throw new WrongCheckOutException();
+           
         }
       
         // Cena wyliczana ze wzoru = ((Cena pokoju * Wskaźnik sezonu) * Ilość dzni) + zniżka za dzieci. Eventualnei Cena jest obliżana dla grup lub dla pobytu minimum 2 tygodnie.
@@ -214,19 +209,15 @@ namespace Project
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.AppendLine(this.client.ToString());
-            builder.Append("Room:  ");
+            builder.Append(" Room:  ");
 
             foreach (Room room in rooms)
             {
-                builder.AppendLine(room.ToString() + " Cost Room: " + CostRoom(room));
+                builder.AppendLine(room.RoomNumber.ToString());
             }
 
-            builder.AppendLine("Check-in date: " + this.checkInDate + "  Check-out date: " + this.checkOutDate);
-            builder.AppendLine("Is check-in: " + this.isCheckIn + "  Is check-out: " + this.isCheckOut + "  Advance: " + Advance());
-            builder.AppendLine("Quantity of days: " + Days() + "  Cost of reservation: " + Amount());
 
-            return builder.ToString();
+            return base.ToString() + builder.ToString();
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Project
     class Client : Person
     {
         private string email;
-        private List<Payment> payments = new List<Payment>();
 
         // Konstruktory
 
@@ -33,8 +32,6 @@ namespace Project
             }
         }
 
-        internal List<Payment> Payments { get => payments; }
-
         // Metody sprawdzające poprawność
 
         private static readonly Regex EmailRegex = new Regex(@"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)");
@@ -52,16 +49,6 @@ namespace Project
                 return (string)("Pan " + this.Name + " " + this.Surname);
             else 
                 return (string)("Pani " + this.Name + " " + this.Surname);
-        }
-
-        public double PaymentStatus() // Nie jestem czy to jest dobrze 
-        {
-            return payments.FindAll(r => !r.IsPaid).Sum(r => r.Amount());
-        }
-
-        public void AddPayment(Payment payment)
-        {
-            payments.Add(payment);
         }
 
         // To string 
