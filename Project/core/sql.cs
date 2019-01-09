@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
-using Dapper;
 
 namespace Project
 {
