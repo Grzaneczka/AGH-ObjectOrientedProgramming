@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    [Serializable]
     class Client : Person
     {
         private string email;
 
-        // Konstruktory 
+        // Konstruktory
 
         public Client(string name, string surname, string phone, Sex sex, string email, string idNumber) : base(name, surname, sex, phone, idNumber)
         {
@@ -37,11 +38,7 @@ namespace Project
 
         private bool ValidateEmail(string email)
         {
-            Match match = EmailRegex.Match(email);
-
-            if (!match.Success)
-                return false;
-            return true;
+            return EmailRegex.Match(email).Success;
         }
          
         // Metody dodatkowe
@@ -50,17 +47,16 @@ namespace Project
         {
             if (this.Sex == Sex.Man)
                 return (string)("Pan " + this.Name + " " + this.Surname);
-            else if (this.Sex == Sex.Woman)
-                return (string)("Pani " + this.Name + " " + this.Surname);
             else 
-                return (string)("Firma " + this.Name + " " + this.Surname);
+                return (string)("Pani " + this.Name + " " + this.Surname);
         }
 
         // To string 
 
         public override string ToString()
         {
-            return "Client: " + FullName() + " " + this.ID_numer + " " + this.Phone + " " + this.Email;
+            return "Client: " + FullName() + " " + this.IDNumer + " " + this.Phone + " " + this.Email;
         }
+
     }
 }

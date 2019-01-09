@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    [Serializable]
     class Employee : Person
     {
-        string function;
+        private string function;
 
         // Konstruktory 
 

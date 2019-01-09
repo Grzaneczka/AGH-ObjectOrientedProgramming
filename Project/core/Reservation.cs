@@ -7,30 +7,29 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class Reservation
+    [Serializable]
+    class Reservation : Payment 
     {
+
         private Client client;
-        private List<Room> rooms;
-        private DateTime date;
+        private List<Room> rooms = new List<Room>();
+        private DateTime checkInDate;
         private DateTime checkOutDate;
 
-        private int numberOfAdults;
-        private int numberOfChildren;
-        private int numberOfBabies;
+        private int adults; 
+        private int children;
+        private int babies;
 
         private bool isCheckIn;
         private bool isCheckOut;
+        private bool canceled;
+        private bool isAdvance;
 
-        // Konstruktory 
+        // Konstruktory
 
-        public Reservation()
+        internal Reservation(string title, Client client, string checkInDate, string checkOutDate,int numberOfAdults, int numberOfChildren, int numberOfBabies, bool checkIn, bool checkOut, bool advance) : base(title)
         {
-            rooms = new List<Room>();
-        }
-
-        public Reservation(Client client, string checkInDate, string checkOutDate,int numberOfAdults, int numberOfChildren, int numberOfBabies, bool checkIn, bool checkOut, bool advance) : this()
-        {
-            if (!DateTime.TryParseExact(checkInDate, new[] { "yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yy", "dd-MM-yy" }, null, DateTimeStyles.None, out this.date)) 
+            if (!DateTime.TryParseExact(checkInDate, new[] { "yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yy", "dd-MM-yy" }, null, DateTimeStyles.None, out this.checkInDate)) 
                 throw new FormatException("Invalid date format");
 
             if (!DateTime.TryParseExact(checkOutDate, new[] { "yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yy", "dd-MM-yy" }, null, DateTimeStyles.None, out this.checkOutDate))
@@ -42,30 +41,38 @@ namespace Project
             this.NumberOfBabies = NumberOfBabies;
             this.IsCheckIn = checkIn;
             this.IsCheckOut = checkOut;
+            this.Canceled = false;
+            this.isAdvance = advance;
 
         }
 
         // Getery i setery 
 
-        public DateTime CheckInDate { get => date; set => date = value; }
+        public DateTime CheckInDate { get => checkInDate; set => checkInDate = value; }
 
         public DateTime CheckOutDate { get => checkOutDate; set => checkOutDate = value; }
 
-        public int NumberOfAdults { get => numberOfAdults; set => numberOfAdults = value; }
+        public int NumberOfAdults { get => adults; set => adults = value; }
 
-        public int NumberOfChildren { get => numberOfChildren; set => numberOfChildren = value; }
+        public int NumberOfChildren { get => children; set => children = value; }
 
-        public int NumberOfBabies { get => numberOfBabies; set => numberOfBabies = value; }
+        public int NumberOfBabies { get => babies; set => babies = value; }
 
         public bool IsCheckIn { get => isCheckIn; set => isCheckIn = value; }
 
         public bool IsCheckOut { get => isCheckOut; set => isCheckOut = value; }
 
+        public bool Canceled { get => canceled; set => canceled = value; }
+
+        internal List<Room> Rooms { get => rooms; }
+
+        internal Client Client { get => client; set => client = value; }
+
         // Metody dodatkowe
 
         public int Days()
         {
-            TimeSpan days = checkOutDate - date;
+            TimeSpan days = checkOutDate - checkInDate;
             return (int)days.TotalDays + 1;
         }
 
@@ -79,96 +86,19 @@ namespace Project
             return this.NumberOfAdults + this.NumberOfChildren + this.NumberOfBabies;
         }
 
-        public void Remove(Room room)
+        public void RemoveRoom(Room room)
         {
             rooms.Remove(room);
         }
 
-        // Cena wyliczana ze wzoru = ((Cena pokoju * Wskaźnik sezonu) * Ilość dzni) + zniżka za dzieci. Eventualnei Cena jest obliżana dla grup lub dla pobytu minimum 2 tygodnie.
-        
-        public double CostSeason(DateTime date)
-        {
-            double costSeason = 0;
-
-            if (date >= Contig.mediumSeasonStart && date <= Contig.mediumSeasonFinish)
-                costSeason = Contig.priceOfMediumSeason;
-            else if (date >= Contig.mediumSeasonFinish && date <= Contig.highSeasonFinish)
-                costSeason = Contig.priceOfHighSeason;
-            else if (date >= Contig.specialSeasonStart && date <= Contig.specialSeasonFinish)
-                costSeason = Contig.priceOfSpecialSeason;
-            else
-                costSeason = Contig.priceOfLowSeason;
-
-                return costSeason;
-        }
-
-        public double CostRoom(Room room)
-        {
-            double costRoom = 0;
-            double cost = 0;
-
-            switch (room.NumberOfPeople())
-            {
-                case 1:
-                    costRoom = Contig.priceRoom1;
-                    break;
-                case 2:
-                    costRoom = Contig.priceRoom2;
-                    break;
-                case 3:
-                    costRoom = Contig.priceRoom3;
-                    break;
-                case 4:
-                    costRoom = Contig.priceRoom4;
-                    break;
-                case 5:
-                    costRoom = Contig.priceRoom5;
-                    break;
-                case 6:
-                    costRoom = Contig.priceRoom6;
-                    break;
-            }
-
-            for (int i = 0; i < Days(); i++)
-            {
-                cost = cost + costRoom * CostSeason(CheckInDate.AddDays(i));
-            }
-            
-            return cost;
-        }
-
-        public double CostPeople()
-        {
-            double cost = 0;
-
-            foreach (Room room in rooms)
-            {
-                cost = cost + CostRoom(room);      
-            }
-
-            return ((cost/NumberOfPeople()) * numberOfAdults * Contig.priceForPerson + (cost / NumberOfPeople()) * numberOfChildren * Contig.priceForChild + (cost / NumberOfPeople()) * numberOfBabies * Contig.priceForBabies);
-        }
-
-        public double Cost()
-        {
-            double cost = CostPeople();
-            
-            if(rooms.Count() >= 3)
-                cost = cost * Contig.priceGroups;
-            if (Days() >= 14)
-                cost = cost * Contig.priceLongStay;
-
-            return cost;
-        }
-
         public int Advance()
         {
-            return (int)(Cost() * Contig.priceAdvances);
+            return (int)(Amount() * Config.PRICE_ADVANCE);
         }
 
-        public void CheckIn(Payment payment)
+        public void CheckIn() 
         {
-            if (payment.AdvanceIsPaid() == true)
+            if (isAdvance == true) 
             {
                 this.isCheckIn = true;
 
@@ -181,20 +111,96 @@ namespace Project
                 throw new WrongCheckInException();
         }
 
-        public void CheckOut(Payment payment)
+        public void CheckOut() 
         {
-            if (payment.GetCountOfNotPaiedSinglePayment() == 0)
-            {
-                this.IsCheckOut = true;
+            this.IsCheckOut = true;
 
-                foreach (Room room in rooms)
-                {
-                    room.IsFree = true;
-                    room.IsClear = false;
-                }
+            foreach (Room room in rooms)
+            {
+                room.IsFree = true;
+                room.IsClear = false;
             }
+           
+        }
+      
+        // Cena wyliczana ze wzoru = ((Cena pokoju * Wskaźnik sezonu) * Ilość dzni) + zniżka za dzieci. Eventualnei Cena jest obliżana dla grup lub dla pobytu minimum 2 tygodnie.
+
+        public double CostSeason(DateTime date)
+        {
+            double costSeason = 0;
+
+            if (date >= Config.MEDIUM_SEASON_START && date <= Config.MEDIUM_SEASON_FINISH)
+                costSeason = Config.PRICE_MEDIUM_SEASON;
+            else if (date >= Config.MEDIUM_SEASON_FINISH && date <= Config.HIGH_SEASON_FINISH)
+                costSeason = Config.PRICE_HIGH_SEASON;
+            else if (date >= Config.sPECIAL_SEASON_START && date <= Config.SPECIAL_SEASON_FINISH)
+                costSeason = Config.PRICE_SPECIAL_SEASON;
             else
-                throw new WrongCheckOutException();
+                costSeason = Config.PRICE_LOW_SEASON;
+
+                return costSeason;
+        }
+
+        public double CostRoom(Room room)
+        {
+            double costRoom = 0;
+            double cost = 0;
+
+            switch (room.NumberOfPeople())
+            {
+                case 1:
+                    costRoom = Config.PRICE_ROOM_1;
+                    break;
+                case 2:
+                    costRoom = Config.PRICE_ROOM_2;
+                    break;
+                case 3:
+                    costRoom = Config.PRICE_ROOM_3;
+                    break;
+                case 4:
+                    costRoom = Config.PRICE_ROOM_4;
+                    break;
+                case 5:
+                    costRoom = Config.PRICE_ROOM_5;
+                    break;
+                case 6:
+                    costRoom = Config.PRICE_ROOM_6;
+                    break;
+            }
+
+            for (int i = 0; i < Days(); i++)
+            {
+                cost += costRoom * CostSeason(CheckInDate.AddDays(i));
+            }
+            
+            return cost;
+        }
+
+        public double CostPeople()
+        {
+            double cost = 0;
+
+            foreach (Room room in rooms)
+            {
+                cost += CostRoom(room);      
+            }
+
+            return ((cost/NumberOfPeople()) * adults * Config.priceForPerson + (cost / NumberOfPeople()) * children * Config.priceForChild + (cost / NumberOfPeople()) * babies * Config.priceForBabies);
+        }
+
+        public override double Amount()
+        {
+            double cost = CostPeople();
+            
+            if(rooms.Count() >= 3)
+                cost = cost * Config.DISCOUNT_GROUPS;
+            if (Days() >= 14)
+                cost = cost * Config.DISCOUNT_LONG_STAY;
+
+            if(isAdvance == true)
+                return cost - Advance();
+
+            return cost;
         }
 
         // To string 
@@ -203,20 +209,15 @@ namespace Project
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.AppendLine(this.client.ToString());
-            builder.Append("Room:  ");
+            builder.Append(" Room:  ");
 
             foreach (Room room in rooms)
             {
-                builder.AppendLine(room.ToString() + " Cost Room: " + CostRoom(room));
+                builder.AppendLine(room.RoomNumber.ToString());
             }
 
-            builder.AppendLine("Check-in date: " + this.date + "  Check-out date: " + this.checkOutDate);
-            builder.AppendLine("Is check-in: " + this.isCheckIn + "  Is check-out: " + this.isCheckOut + "  Advance: " + Advance());
-            builder.AppendLine("Quantity of days: " + Days() + "  Cost of reservation: " + Cost());
 
-            return builder.ToString();
+            return base.ToString() + builder.ToString();
         }
-       
     }
 }

@@ -6,64 +6,41 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    [Serializable]
     class Payment
     {
-        private Client client;
-        private List<SinglePayment> singlePayments;
+        private DateTime date;
+        private string title;
+        private bool isPaid;
+        private double amount;
 
         //Konstruktory 
 
-        public Payment(Client client)
+        public Payment(string title)
         {
-            this.client = client;
-            this.singlePayments = new List<SinglePayment>();
+            this.date = DateTime.Now;
+            this.title = title;
+            this.isPaid = false;
+            this.amount = Amount();
         }
+
+        //Getery i Setery
+
+        public string Title { get => title; set => title = value; }
+
+        public bool IsPaid { get => isPaid; set => isPaid = value; }
 
         // Metody dodatkowe
 
-        public void AddSinglePayment(SinglePayment singlePayment)
+        public virtual double Amount()
         {
-            singlePayments.Add(singlePayment);
+            return 0;
         }
 
-        public void AddReserwation(Reservation reservation)
+        // To string 
+         public override string ToString()
         {
-            singlePayments.Add(new SinglePayment("Reserwation", reservation.Cost(), 1, false, reservation.CheckInDate));
+            return this.Title + " " + Amount();
         }
-
-        public void AddAdvance(Reservation reservation)
-        {
-            singlePayments.Add(new SinglePayment("Advance", reservation.Advance(), 1, false, DateTime.Now));
-        }
-
-        public int GetCountOfNotPaiedSinglePayment()
-        {
-            return singlePayments.FindAll(sp => sp.IsPaid == false).Count();
-        }
-
-        public bool AdvanceIsPaid()
-        {
-            if (singlePayments.FindAll(sp => sp.Name == "Advance" && sp.IsPaid == true).Count() == singlePayments.FindAll(sp => sp.Name == "Advance").Count())
-                return true;
-            return false;
-        }
-
-        // To string
-
-        public override string ToString()
-        {
-            StringBuilder builder = new StringBuilder();
-
-            builder.AppendLine(this.client.ToString());
-            builder.AppendLine("Single Payment:  ");
-
-            foreach (SinglePayment singlePayment in singlePayments)
-            {
-                builder.AppendLine(singlePayment.ToString());
-            }
-
-            return builder.ToString();
-        }
-
     }
 }

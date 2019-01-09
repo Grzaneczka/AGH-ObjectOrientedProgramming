@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class Room
+    [Serializable]
+    class Room : ICloneable
     {
         private int roomNumber;
         private int numberOfSingleBeds;
@@ -48,7 +49,12 @@ namespace Project
         {
             return (numberOfSingleBeds * 1 + numberOfMarriageBeds * 2);
         }
-        
+
+        public object Clone()
+        {
+            return (Room)this.MemberwiseClone();
+        }
+
         // To string 
 
         public override string ToString()

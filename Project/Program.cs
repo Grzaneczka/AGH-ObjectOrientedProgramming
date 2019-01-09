@@ -10,26 +10,16 @@ namespace Project
     {
         static void Main(string[] args)
         {
-            /*
-            Person person1 = new Person("Adam", "Adamski", Sex.Man, "678-658-789", "DSC 234561");
-            //Console.WriteLine(person1);
-            //Console.WriteLine();
+            Employee employee = new Employee("Karolina", "Grzanka","879-987-987", Sex.Woman, "Administrator");
 
-            Employee employee1 = new Employee("Andzej", "Kosa", "768-987-234", Sex.Man, "Recepcjonista");
-            //Console.WriteLine(employee1);
-            //Console.WriteLine();
+            Console.WriteLine("-----------------HOTEL--------------------------------");
 
-            Client client1 = new Client("Joanna", "Suwaj", "876-543-456", Sex.Woman, "joannasuwaj@gmail.com", "DGC 654329");
-            //Console.WriteLine(client1);
-            //Console.WriteLine();
+            Hotel hotel = new Hotel("NAJLEPSZY HOTEL NA ŚWIACIE");
 
-            Room room1 = new Room(1, 0, 1, false, false);
-            //Console.WriteLine(room1.NumberOfPeople());
-            //Console.WriteLine();
+            Room room01 = hotel.CreateRoom(01, 0, 1, false, employee);
+            Room room02 = hotel.CreateRoom(02, 1, 1, false, employee);
 
-            Room room2 = new Room(2, 1, 0, false, true);
-            //Console.WriteLine(room2.NumberOfPeople());
-            //Console.WriteLine();
+            Client client = hotel.CreateClient("Jan", "Główka", "765-234-567", Sex.Man, "janglowka@add.asd", "RSE 654332", employee);
 
             SinglePayment singlePayment1 = new SinglePayment("Kawusia", 11.69, 2, false);
             //Console.WriteLine(singlePayment1);
@@ -62,7 +52,19 @@ namespace Project
             {
                 Console.WriteLine(employee.ToString());
             }
+            Client client2 = hotel.CreateClient("Zosia", "Samosia", "546-653-765", Sex.Woman, "Zosia_samosia@gsr.dkfi", "RES 645378", employee);
+           
+            hotel.CreateReservation("Reservation room 1 28/09/2019 - 30/09/2019", client, "2019/09/28", "2019/09/30", 2, 0, 0, employee, room01);
+       
+            Console.WriteLine(hotel);
 
+            Console.WriteLine("-----------------ACCOUNTS--------------------------------");
+
+
+            foreach (Account account in hotel.Accounts)
+            {
+                Console.WriteLine(account.ToString());
+            }
             List<List<string>> querry_output2 = Sql.ExecuteSelectQuerry("SELECT * FROM Clients");
             List<Client> AllClients = Sql.ConvertToClient(querry_output2);
             foreach (Client client in AllClients)
@@ -76,7 +78,12 @@ namespace Project
             {
                 Console.WriteLine(room.ToString());
             }
+            //Console.WriteLine("-----------------SERIALIZACJA--------------------------------");
 
+            //Hotel.SaveXML("hotel.xml", hotel);
+            //Console.WriteLine("Odczyt XML");
+            //Hotel hotel2 = Hotel.ReadXML("hotel.xml");
+            //Console.WriteLine(hotel2);
             List<List<string>> querry_output4 = Sql.ExecuteSelectQuerry("SELECT * FROM SinglePayment");
             List<SinglePayment> AllSinglePayments = Sql.ConvertToSinglePayment(querry_output4);
             foreach (SinglePayment single_payment in AllSinglePayments)
