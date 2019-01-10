@@ -78,9 +78,6 @@ namespace Project
                     case "Woman":
                         tmp_sex = Sex.Woman;
                         break;
-                    case "Company":
-                        tmp_sex = Sex.Company;
-                        break;
                     default:
                         tmp_sex = Sex.Unknown;
                         break;

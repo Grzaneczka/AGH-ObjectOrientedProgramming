@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    [Serializable]
     class Room
     {
         private int roomNumber;

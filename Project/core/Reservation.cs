@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    [Serializable]
     class Reservation
     {
         private Client client;
@@ -60,6 +61,8 @@ namespace Project
         public bool IsCheckIn { get => isCheckIn; set => isCheckIn = value; }
 
         public bool IsCheckOut { get => isCheckOut; set => isCheckOut = value; }
+
+        public List<Room> Rooms { get => rooms; set => rooms = value; }
 
         // Metody dodatkowe
 
@@ -154,9 +157,9 @@ namespace Project
             double cost = CostPeople();
             
             if(rooms.Count() >= 3)
-                cost = cost * Contig.priceGroups;
+                cost *= Contig.priceGroups;
             if (Days() >= 14)
-                cost = cost * Contig.priceLongStay;
+                cost *= Contig.priceLongStay;
 
             return cost;
         }

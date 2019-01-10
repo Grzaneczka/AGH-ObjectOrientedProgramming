@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 
 namespace Project
 {
+    [Serializable]
     class Hotel
     {
         private string name;
-        private List<Reservation> cancelingReservations;
         private List<Reservation> reservations;
         private List<Room> rooms;
-
+        List<Employee> employees;
+        List<Client> clients;
+        List<Payment> payments;
         // Konstruktory 
 
         public Hotel()
         {
             this.Name = null;
             this.reservations = new List<Reservation>();
-            this.cancelingReservations = new List<Reservation>();
             this.rooms = new List<Room>();
+            this.employees = new List<Employee>();
+            this.clients = new List<Client>();
+            this.payments = new List<Payment>();
         }
 
         public Hotel(string name) : this()
@@ -32,45 +36,59 @@ namespace Project
 
         public string Name { get => name; set => name = value; }
 
-        // Metody dodatkowe
+        /*
+         *      METODY DO GUI
+         */
 
-        public void CancelReservation(Reservation reservation)
+        // dodawanie klienta
+
+        // dodawanie pracownika
+
+        // dodawanie pokoju
+        public void AddRoom(Room room)
         {
-            reservations.Remove(reservation);
-            cancelingReservations.Add(reservation);
-
-            //TimeSpan days = reservation.CheckInDate -  DateTime.Now;
-            //if(days.TotalDays >= 14)
-            //{
-
-            //}
+            rooms.Add(room);
         }
 
-        public void RestoreReservations(Reservation reservation)
-        {
-            reservations.Add(reservation);
-            cancelingReservations.Remove(reservation);
-        }
-
+        // dodawanie rezerwacji
         public void AddReserwation(Reservation reservation)
         {
             reservations.Add(reservation);
         }
 
-        public void AddRoom(Room room)
+        // usuwanie rezerwacji
+        public void CancelReservation(Reservation reservation)
         {
-            rooms.Add(room);
+            reservations.Remove(reservation);
+            foreach (Room room in reservation.Rooms)
+                room.IsFree = true;
         }
+
+        // wolne pokoje
+        public List<Room> FreeRooms(DateTime checkIn, DateTime checkOut)
+        {
+            return rooms.FindAll(room => IsRoomReserved(room, checkIn, checkOut));
+        }
+
+
+
+
+        // Metody dodatkowe
 
         public List<Room> DirtyFreeRooms()
         {
             return this.rooms.FindAll(r => r.IsClear == false && r.IsFree == true);
         }
 
-        //public List<Room> FreeRooms(DateTime checkIn, DateTime checkOut)
-        //{
+        public bool IsRoomReserved(Room room, DateTime checkIn, DateTime checkOut)
+        {
+            return reservations
+                .Where(r => r.Rooms.Contains(room))
+                .Where(r => !(checkOut <= r.CheckInDate || r.CheckOutDate <= checkIn))
+                .Count() > 0;
+        }
 
-        //}
+
 
         public void Cleaned(int roomNumber)
         {
@@ -81,10 +99,6 @@ namespace Project
         {
             CancelReservation(reservations.Find(r => r.CheckInDate.AddDays(2) == DateTime.Now && r.IsCheckIn == false));
         }
-
-        //public void ExtendReservations(DateTime date, Reservation reservation)
-        //{
-        //}
 
         // To string
 
