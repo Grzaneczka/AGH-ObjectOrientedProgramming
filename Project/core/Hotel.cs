@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace Project
 {
     [Serializable]
-    class Hotel
+    public class Hotel
     {
         private string name;
         private List<Reservation> reservations;
@@ -42,17 +42,17 @@ namespace Project
 
         public string Name { get => name; set => name = value; }
 
-        internal List<Reservation> Reservations { get => reservations; set => reservations = value; }
+        public List<Reservation> Reservations { get => reservations; set => reservations = value; }
 
-        internal List<Room> Rooms { get => rooms; set => rooms = value; }
+        public List<Room> Rooms { get => rooms; set => rooms = value; }
 
-        internal List<Client> Clients { get => clients; set => clients = value; }
+        public List<Client> Clients { get => clients; set => clients = value; }
 
-        internal List<Employee> Employees { get => employees; set => employees = value; }
+        public List<Employee> Employees { get => employees; set => employees = value; }
 
-        internal List<Log> Logs { get => logs; set => logs = value; }
+        public List<Log> Logs { get => logs; set => logs = value; }
 
-        internal List<Account> Accounts { get => accounts; set => accounts = value; }
+        public List<Account> Accounts { get => accounts; set => accounts = value; }
 
         // Metody dodatkowe => dotyczące rezerwacji 
 
@@ -64,20 +64,20 @@ namespace Project
             accounts.Find(a => a.Client == client).AddPayment(reservation);
 
             string contents = "Create reservation: " + title;
-            AddLog(employee, Type.Create_Reserwation, contents);
+            AddLog(employee, LogType.CREATE_RESERWATION, contents);
 
             return reservation;
         }
 
         public bool ExtendReservations(DateTime date, Reservation reservation, Employee employee)
         {
-            string contents = "Extend reservation " + reservation.Title;
-            AddLog(employee, Type.Extend_Reservations, contents);
-
             bool canBeExtended = reservation.Rooms.All(room => !IsRoomReserved(room, reservation.CheckOutDate, date));
 
             if (!canBeExtended)
                 return false;
+
+            string contents = "Extend reservation " + reservation.Title;
+            AddLog(employee, LogType.EXTEND_RESERVATIONS, contents);
 
             reservation.CheckOutDate = date;
             return true;
@@ -85,10 +85,10 @@ namespace Project
 
         public void CanceledReservation(Reservation reservation, Employee employee)
         {
-            string contents = "Canceled reservation " + reservation.Title;
-            AddLog(employee, Type.Canceled_Reservations, contents);
-
             reservation.Canceled = true;
+
+            string contents = "Canceled reservation " + reservation.Title;
+            AddLog(employee, LogType.CANCELED_RESERVATIONS, contents);
         }
 
         public List<Reservation> CanceledReservations()
@@ -108,7 +108,7 @@ namespace Project
             reservation.Canceled = false;
 
             string contents = "Restored canceled reservation " + reservation.Title;
-            AddLog(employee, Type.Restor_Canceled_Reservation, contents);
+            AddLog(employee, LogType.RESTOR_CANCELED_RESERVATION, contents);
         }
 
         public void CheckIn(Reservation reservation, Employee employee)
@@ -116,17 +116,17 @@ namespace Project
             reservation.CheckIn();
 
             string contents = "Checki in reservation " + reservation.Title;
-            AddLog(employee, Type.Check_In, contents);
+            AddLog(employee, LogType.CHECK_IN, contents);
         }
 
         public void ChecOut(Reservation reservation, Employee employee)
         {
-            if (accounts.Find(a => a.Client == reservation.Client).AccountStatus() == 0)
+            if (accounts.Find(a => a.Client == reservation.Client).AccountDebt() == 0)
             {
                 reservation.CheckOut();
 
                 string contents = "Checki out reservation " + reservation.Title;
-                AddLog(employee, Type.Check_Out, contents);
+                AddLog(employee, LogType.CHECK_OUT, contents);
             }
             else
                 throw new WrongCheckOutException();
@@ -136,11 +136,12 @@ namespace Project
 
         public Room CreateRoom(int roomNumber, int numberOfSingleBeds, int numberOfMarriageBeds, bool isBalcony, Employee employee)
         {
-            string contents = "Create room " + roomNumber;
-            AddLog(employee, Type.Create_Room, contents);
-
             Room room = new Room(roomNumber, numberOfSingleBeds, numberOfMarriageBeds, isBalcony, false);
             rooms.Add(room);
+
+            string contents = "Create room " + roomNumber;
+            AddLog(employee, LogType.CREATE_ROOM, contents);
+
             return room;
         }
         
@@ -164,43 +165,44 @@ namespace Project
 
         public void Cleaned(int roomNumber, Employee employee)
         {
-            string contents = "Cleaned room " + roomNumber;
-            AddLog(employee, Type.Cleaning, contents);
-
             rooms.Find(r => r.RoomNumber == roomNumber).IsClear = true;
+
+            string contents = "Cleaned room " + roomNumber;
+            AddLog(employee, LogType.CLEANING, contents);
+
         }
 
         // Metody dodatkowe => dotyczące clienta
 
         public Client CreateClient(string name, string surname, string phone, Sex sex, string email, string idNumber, Employee employee)
         {
-            string contents = "Create client " + idNumber;
-            AddLog(employee, Type.Create_Client, contents);
-
             Client client = new Client(name, surname, phone, sex, email, idNumber);
             clients.Add(client);
 
-            CreateAccount(client);          
+            CreateAccount(client);
+
+            string contents = "Create client " + idNumber;
+            AddLog(employee, LogType.CREATE_CLIENT, contents);
 
             return client;
         }
 
         // Metody dodatkowe => dotyczące pracownika
 
-        public Employee CreateEmplyee(string name, string surname, string phone, Sex sex, string function, Employee employee1)
+        public Employee CreateEmplyee(string name, string surname, string phone, Sex sex, string function)
         {
-            string contents = "Create emplyee " + name + " " + surname;
-            AddLog(employee1, Type.Create_Emplyee, contents);
-
             Employee employee = new Employee(name, surname, phone, sex, function);
             employees.Add(employee);
+
+            string contents = "Create emplyee " + name + " " + surname;
+            AddLog(employee, LogType.CREATE_EMPLYEE, contents);
+
             return employee;
         }
 
-        public void AddLog(Employee employee, Type type, string contents)
+        public void AddLog(Employee employee, LogType type, string contents)
         {
-            Log log = new Log(employee, type, contents);
-            logs.Add(log);
+            logs.Add(new Log(employee, type, contents));
         }
 
         // Metody dodatkowe => dotyczące rachunku 
@@ -213,6 +215,10 @@ namespace Project
             return account;
         }
 
+        public void AddSinglePayment(Client client, SinglePayment singlePayment)
+        {
+            accounts.Find(a => a.Client == client).AddPayment(singlePayment);
+        }
 
         // To string
 
@@ -249,7 +255,7 @@ namespace Project
 
         public static void SaveXML(string name, Hotel hotel)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Hotel));
+            XmlSerializer serializer = new XmlSerializer(typeof(Hotel), new Type[] { typeof(SinglePayment) });
             StreamWriter writer = new StreamWriter(name);
             serializer.Serialize(writer, hotel);
             writer.Close();
@@ -257,7 +263,7 @@ namespace Project
 
         public static Hotel ReadXML(string name)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Hotel));
+            XmlSerializer serializer = new XmlSerializer(typeof(Hotel), new Type[] { typeof(SinglePayment) });
             using (StreamReader reader = new StreamReader(name))
             {
                 Hotel score = serializer.Deserialize(reader) as Hotel;

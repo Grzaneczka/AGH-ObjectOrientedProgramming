@@ -10,7 +10,8 @@ namespace Project
     public enum Sex { Woman, Man }
 
     [Serializable]
-    abstract class Person : IComparable<Person>
+
+    public abstract class Person : IComparable<Person>
     {
 
         private string name;
@@ -20,6 +21,11 @@ namespace Project
         private Sex sex;
 
         // Konstruktory 
+
+        public Person()
+        {
+
+        }
 
         public Person(string name, string surname, Sex sex)
         {

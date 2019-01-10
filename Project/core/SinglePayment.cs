@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Project
 {
     [Serializable]
-    class SinglePayment : Payment 
+    [XmlInclude(typeof(Payment))]
+
+    public class SinglePayment : Payment 
     {
         private double price;
         private double quantity;
 
         // Konstruktory 
+
+        public SinglePayment()
+        {
+
+        }
 
         public SinglePayment(string title, double price, double quantity) : base(title)
         {

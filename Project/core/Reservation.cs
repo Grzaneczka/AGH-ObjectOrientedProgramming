@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Project
 {
     [Serializable]
-    class Reservation : Payment 
+
+    public class Reservation : Payment 
     {
 
         private Client client;
@@ -27,7 +28,12 @@ namespace Project
 
         // Konstruktory
 
-        internal Reservation(string title, Client client, string checkInDate, string checkOutDate,int numberOfAdults, int numberOfChildren, int numberOfBabies, bool checkIn, bool checkOut, bool advance) : base(title)
+        public Reservation()
+        {
+
+        }
+        
+        public Reservation(string title, Client client, string checkInDate, string checkOutDate,int numberOfAdults, int numberOfChildren, int numberOfBabies, bool checkIn, bool checkOut, bool advance) : base(title)
         {
             if (!DateTime.TryParseExact(checkInDate, new[] { "yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yy", "dd-MM-yy" }, null, DateTimeStyles.None, out this.checkInDate)) 
                 throw new FormatException("Invalid date format");
@@ -64,9 +70,11 @@ namespace Project
 
         public bool Canceled { get => canceled; set => canceled = value; }
 
-        internal List<Room> Rooms { get => rooms; }
+        public List<Room> Rooms { get => rooms; }
 
-        internal Client Client { get => client; set => client = value; }
+        public Client Client { get => client; set => client = value; }
+
+        public bool IsAdvance { get => isAdvance; set => isAdvance = value; }
 
         // Metody dodatkowe
 
@@ -93,12 +101,12 @@ namespace Project
 
         public int Advance()
         {
-            return (int)(Amount() * Config.PRICE_ADVANCE);
+            return (int)(TotalAmonut() * Config.PRICE_ADVANCE);
         }
 
         public void CheckIn() 
         {
-            if (isAdvance == true) 
+            if (isAdvance) 
             {
                 this.isCheckIn = true;
 
@@ -133,7 +141,7 @@ namespace Project
                 costSeason = Config.PRICE_MEDIUM_SEASON;
             else if (date >= Config.MEDIUM_SEASON_FINISH && date <= Config.HIGH_SEASON_FINISH)
                 costSeason = Config.PRICE_HIGH_SEASON;
-            else if (date >= Config.sPECIAL_SEASON_START && date <= Config.SPECIAL_SEASON_FINISH)
+            else if (date >= Config.SPECIAL_SEASON_START && date <= Config.SPECIAL_SEASON_FINISH)
                 costSeason = Config.PRICE_SPECIAL_SEASON;
             else
                 costSeason = Config.PRICE_LOW_SEASON;
@@ -185,22 +193,27 @@ namespace Project
                 cost += CostRoom(room);      
             }
 
-            return ((cost/NumberOfPeople()) * adults * Config.priceForPerson + (cost / NumberOfPeople()) * children * Config.priceForChild + (cost / NumberOfPeople()) * babies * Config.priceForBabies);
+            return ((cost/NumberOfPeople()) * adults * Config.PRICE_FOR_ADULT + (cost / NumberOfPeople()) * children * Config.PRICE_FOR_CHILD + (cost / NumberOfPeople()) * babies * Config.PRICE_FOR_BABIES);
         }
 
-        public override double Amount()
+        public double TotalAmonut()
         {
             double cost = CostPeople();
-            
-            if(rooms.Count() >= 3)
+
+            if (rooms.Count() >= 3)
                 cost = cost * Config.DISCOUNT_GROUPS;
             if (Days() >= 14)
                 cost = cost * Config.DISCOUNT_LONG_STAY;
 
-            if(isAdvance == true)
-                return cost - Advance();
-
             return cost;
+        }
+
+        public override double Amount()
+        {
+            if(isAdvance)
+                return TotalAmonut() - Advance();
+            else
+                return TotalAmonut();
         }
 
         // To string 
