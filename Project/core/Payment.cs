@@ -7,21 +7,25 @@ using System.Threading.Tasks;
 namespace Project
 {
     [Serializable]
-    class Payment
+
+    public abstract class Payment
     {
         private DateTime date;
         private string title;
         private bool isPaid;
-        private double amount;
 
         //Konstruktory 
+
+        public Payment()
+        {
+
+        }
 
         public Payment(string title)
         {
             this.date = DateTime.Now;
             this.title = title;
             this.isPaid = false;
-            this.amount = Amount();
         }
 
         //Getery i Setery
@@ -32,11 +36,8 @@ namespace Project
 
         // Metody dodatkowe
 
-        public virtual double Amount()
-        {
-            return 0;
-        }
-
+        public abstract double Amount();
+        
         // To string 
          public override string ToString()
         {

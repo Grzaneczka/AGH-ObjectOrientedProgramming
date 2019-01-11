@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Project
 {
     [Serializable]
-    class Room : ICloneable
+
+    public class Room : ICloneable
     {
         private int roomNumber;
         private int numberOfSingleBeds;
@@ -17,7 +18,12 @@ namespace Project
         private bool isClear;
         private bool isFree;
 
-       // Konstruktory 
+        // Konstruktory 
+
+        public Room()
+        {
+
+        }
 
         public Room(int roomNumber, int numberOfSingleBeds, int numberOfMarriageBeds, bool isBalcony, bool isClear)
         {
@@ -47,7 +53,7 @@ namespace Project
 
         public int NumberOfPeople()
         {
-            return (numberOfSingleBeds * 1 + numberOfMarriageBeds * 2);
+            return (numberOfSingleBeds + numberOfMarriageBeds * 2);
         }
 
         public object Clone()

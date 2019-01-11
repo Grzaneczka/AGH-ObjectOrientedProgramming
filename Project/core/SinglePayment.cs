@@ -3,33 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Project
 {
     [Serializable]
-    class SinglePayment : Payment 
+    [XmlInclude(typeof(Payment))]
+
+    public class SinglePayment : Payment 
     {
         private double price;
         private double quantity;
 
         // Konstruktory 
 
-        public SinglePayment(string title, double price, double quantity) : base(title)
+        public SinglePayment()
         {
-            this.Name = name;
-            this.Price = price;
-            this.Quantity = quantity;
-            this.IsPaid = isPaid;
-            this.date = DateTime.Now;
+
         }
 
-        public SinglePayment(string name, double price, double quantity, bool isPaid, DateTime date) : this(name, price, quantity, isPaid)
+        public SinglePayment(string title, double price, double quantity) : base(title)
         {
-            this.Name = name;
-            this.Price = price;
-            this.Quantity = quantity;
-            this.IsPaid = isPaid;
-            this.date = date;
             this.price = price;
             this.quantity = quantity;
         }

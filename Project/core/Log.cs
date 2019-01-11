@@ -6,19 +6,25 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    public enum Type { Create_Reserwation, Check_In, Check_Out, Extend_Reservations, Canceled_Reservations,  Cleaning, Create_Room, Create_Client, Create_Emplyee, Restor_Canceled_Reservation, Other }
+    public enum LogType { CREATE_RESERWATION, CHECK_IN, CHECK_OUT, EXTEND_RESERVATIONS, CANCELED_RESERVATIONS, CLEANING, CREATE_ROOM, CREATE_CLIENT, CREATE_EMPLYEE, RESTOR_CANCELED_RESERVATION, OTHER }
 
     [Serializable]
-    class Log
+
+    public class Log
     {
         private DateTime date;
         private Employee employee;
-        private Type type;
+        private LogType type;
         private string contents;
 
         // Konstruktury 
 
-        internal Log(Employee employee, Type type, string contents)
+        public Log()
+        {
+
+        }
+
+        public Log(Employee employee, LogType type, string contents)
         {
             this.date = DateTime.Now;
             this.employee = employee;
@@ -30,11 +36,11 @@ namespace Project
 
         public DateTime Date { get => date; set => date = value; }
 
-        public Type Type { get => type; set => type = value; }
+        public LogType Type { get => type; set => type = value; }
 
         public string Contents { get => contents; set => contents = value; }
 
-        internal Employee Employee { get => employee; set => employee = value; }
+        public Employee Employee { get => employee; set => employee = value; }
 
         // To String 
 

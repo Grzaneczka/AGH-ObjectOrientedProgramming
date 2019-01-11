@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class Account
+    [Serializable]
+
+    public class Account
     {
         private Client client;
         private List<Payment> payments = new List<Payment>();
 
         //Konstruktory 
+
+        public Account()
+        {
+
+        }
 
         public Account(Client client)
         {
@@ -20,18 +27,18 @@ namespace Project
 
         //Getery i Setery 
 
-        internal Client Client { get => client; set => client = value; }
+        public Client Client { get => client; set => client = value; }
 
-        internal List<Payment> Payments { get => payments; set => payments = value; }
+        public List<Payment> Payments { get => payments; set => payments = value; }
 
         // Metody dodatkowe
 
-        public double AccountStatus() // Nie jestem czy to jest dobrze 
+        public double AccountDebt() // Nie jestem czy to jest dobrze 
         {
             return payments.FindAll(r => !r.IsPaid).Sum(r => r.Amount());
         }
 
-        internal void AddPayment(Payment payment)
+        public void AddPayment(Payment payment)
         {
             payments.Add(payment);
         }
@@ -47,8 +54,10 @@ namespace Project
 
             foreach (Payment payment in payments)
             {
-                builder.AppendLine(payment.ToString());
+                builder.Append(payment.ToString());
             }
+
+            builder.AppendLine();
 
             return builder.ToString();
         }

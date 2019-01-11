@@ -8,11 +8,16 @@ using System.Threading.Tasks;
 namespace Project
 {
     [Serializable]
-    class Client : Person
+    public class Client : Person
     {
         private string email;
 
         // Konstruktory
+
+        public Client() : base()
+        {
+
+        }
 
         public Client(string name, string surname, string phone, Sex sex, string email, string idNumber) : base(name, surname, sex, phone, idNumber)
         {
@@ -57,6 +62,5 @@ namespace Project
         {
             return "Client: " + FullName() + " " + this.IDNumer + " " + this.Phone + " " + this.Email;
         }
-
     }
 }
