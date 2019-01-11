@@ -38,9 +38,9 @@ namespace Project
 
             List<List<string>> querry_output = Sql.ExecuteSelectQuerry("SELECT * FROM Employees");
             List<Employee> AllEmployees = Sql.ConvertToEmployee(querry_output);
-            foreach (Employee employee in AllEmployees)
+            foreach (Employee employee1 in AllEmployees)
             {
-                Console.WriteLine(employee.ToString());
+                Console.WriteLine(employee1.ToString());
             }
 
             foreach (Account account in hotel.Accounts)

@@ -199,11 +199,11 @@ namespace Project
         public double TotalAmonut()
         {
             double cost = CostPeople();
-            
-            if(rooms.Count() >= 3)
-                cost *= Contig.priceGroups;
+
+            if (rooms.Count() >= 3)
+                cost *= Config.DISCOUNT_GROUPS;     // do poprawy
             if (Days() >= 14)
-                cost *= Contig.priceLongStay;
+                cost *= Config.DISCOUNT_LONG_STAY;   // do poprawy
 
             return cost;
         }

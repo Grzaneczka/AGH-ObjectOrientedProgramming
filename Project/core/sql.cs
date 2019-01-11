@@ -108,9 +108,6 @@ namespace Project
                     case "Woman":
                         tmp_sex = Sex.Woman;
                         break;
-                    case "Company":
-                        tmp_sex = Sex.Company;
-                        break;
                     default:
                         tmp_sex = Sex.Unknown;
                         break;
@@ -151,10 +148,8 @@ namespace Project
                 string tmp_name = row[1];
                 double tmp_price = Double.Parse(row[2]);
                 double tmp_quantity = Double.Parse(row[3]);
-                bool tmp_paid = TrueOrFalse(row[4]);
-                DateTime tmp_date = DateTime.Parse(row[5]);
 
-                SinglePayment tmp_payment = new SinglePayment(tmp_name, tmp_price, tmp_quantity, tmp_paid);
+                SinglePayment tmp_payment = new SinglePayment(tmp_name, tmp_price, tmp_quantity);
                 Allpayments.Add(tmp_payment);
             }
             return Allpayments;
@@ -193,9 +188,6 @@ namespace Project
                                 break;
                             case "Woman":
                                 tmp_sex = Sex.Woman;
-                                break;
-                            case "Company":
-                                tmp_sex = Sex.Company;
                                 break;
                             default:
                                 tmp_sex = Sex.Unknown;
