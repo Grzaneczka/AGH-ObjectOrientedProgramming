@@ -34,14 +34,6 @@ namespace Project
             Console.WriteLine(hotel);
 
             Console.WriteLine("-----------------ACCOUNTS--------------------------------");
-            /* SQL test */
-
-            List<List<string>> querry_output = Sql.ExecuteSelectQuerry("SELECT * FROM Employees");
-            List<Employee> AllEmployees = Sql.ConvertToEmployee(querry_output);
-            foreach (Employee employee1 in AllEmployees)
-            {
-                Console.WriteLine(employee1.ToString());
-            }
 
             foreach (Account account in hotel.Accounts)
             {
@@ -50,7 +42,33 @@ namespace Project
                 Console.WriteLine(account.AccountDebt());
             }
 
+            Console.WriteLine("-----------------SERIALIZACJA--------------------------------");
 
+            Hotel.SaveXML("hotel.xml", hotel);
+            Console.WriteLine("Odczyt XML");
+            Hotel hotel2 = Hotel.ReadXML("hotel.xml");
+            Console.WriteLine(hotel2);
+
+
+            /* SQL test */
+            Console.WriteLine("-----------------TEST SQL--------------------------------");
+
+            Console.WriteLine("\nWpisywanie do bazy");
+
+            Employee employee_test = new Employee("Szymon", "Bednarek", "222-333-222", Sex.Man, "Szef");
+            Sql.InsertEmployee(employee_test);
+            Console.WriteLine("Wpisano nowego pracownika");
+
+
+            Console.WriteLine("\nAll Employees:");
+            List<List<string>> querry_output = Sql.ExecuteSelectQuerry("SELECT * FROM Employees");
+            List<Employee> AllEmployees = Sql.ConvertToEmployee(querry_output);
+            foreach (Employee employee1 in AllEmployees)
+            {
+                Console.WriteLine(employee1.ToString());
+            }
+
+            Console.WriteLine("\nAll Clients:");
             List<List<string>> querry_output2 = Sql.ExecuteSelectQuerry("SELECT * FROM Clients");
             List<Client> AllClients = Sql.ConvertToClient(querry_output2);
             foreach (Client client in AllClients)
@@ -58,7 +76,7 @@ namespace Project
                 Console.WriteLine(client.ToString());
             }
 
-            Console.WriteLine("-----------------SERIALIZACJA--------------------------------");
+            Console.WriteLine("\nAll Rooms:");
             List<List<string>> querry_output3 = Sql.ExecuteSelectQuerry("SELECT * FROM Rooms");
             List<Room> AllRooms = Sql.ConvertToRoom(querry_output3);
             foreach (Room room in AllRooms)
@@ -66,16 +84,14 @@ namespace Project
                 Console.WriteLine(room.ToString());
             }
 
-            Hotel.SaveXML("hotel.xml", hotel);
-            Console.WriteLine("Odczyt XML");
-            Hotel hotel2 = Hotel.ReadXML("hotel.xml");
-            Console.WriteLine(hotel2);
+            Console.WriteLine("\nAll single payments:");
             List<List<string>> querry_output4 = Sql.ExecuteSelectQuerry("SELECT * FROM SinglePayment");
             List<SinglePayment> AllSinglePayments = Sql.ConvertToSinglePayment(querry_output4);
             foreach (SinglePayment single_payment in AllSinglePayments)
             {
                 Console.WriteLine(single_payment.ToString());
             }
+
 
             Console.ReadLine();
         }

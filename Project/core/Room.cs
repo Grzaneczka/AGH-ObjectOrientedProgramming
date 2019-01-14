@@ -25,14 +25,14 @@ namespace Project
 
         }
 
-        public Room(int roomNumber, int numberOfSingleBeds, int numberOfMarriageBeds, bool isBalcony, bool isClear)
+        public Room(int roomNumber, int numberOfSingleBeds, int numberOfMarriageBeds, bool isBalcony, bool isClear, bool isFree)
         {
             this.roomNumber = roomNumber;
             this.numberOfSingleBeds = numberOfSingleBeds;
             this.numberOfMarriageBeds = numberOfMarriageBeds;
             this.isBalcony = isBalcony;
             this.isClear = isClear;
-            this.isFree = true;
+            this.isFree = isFree;
         }
 
         // Getery i Setery 

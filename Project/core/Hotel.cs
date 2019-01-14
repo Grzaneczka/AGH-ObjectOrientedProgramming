@@ -138,7 +138,7 @@ namespace Project
 
         public Room CreateRoom(int roomNumber, int numberOfSingleBeds, int numberOfMarriageBeds, bool isBalcony, Employee employee)
         {
-            Room room = new Room(roomNumber, numberOfSingleBeds, numberOfMarriageBeds, isBalcony, false);
+            Room room = new Room(roomNumber, numberOfSingleBeds, numberOfMarriageBeds, isBalcony, false, true);
             rooms.Add(room);
 
             string contents = "Create room " + roomNumber;
