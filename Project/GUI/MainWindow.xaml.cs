@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Project;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,14 +22,23 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Hotel h1 = (Hotel)Hotel.ReadXML("C:/Users/DELL/Desktop/C#/AGH-ObjectOrientedProgramming/Project/bin/Debug/hotel.xml");
+        public static List<Client> ListaKlientow = h1.Clients;
+
+        
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Label_SizeChanged(object sender, SizeChangedEventArgs e)
+      
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            KliencieOkno okno = new KliencieOkno();
+            okno.ShowDialog();
         }
+
+        
     }
 }
