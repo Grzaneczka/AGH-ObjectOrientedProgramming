@@ -10,6 +10,7 @@
         <Label x:Name="Label_ListaKlientow" Content="Lista klientów" Height="50" Margin="0,10,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="ListBox_ListaKlientow" Height="100" Margin="0,60,0,0" VerticalAlignment="Top" />
         <Button x:Name="Button_DodajK" Content="Dodaj" HorizontalAlignment="Left" Height="40" Margin="55,320,0,0" VerticalAlignment="Top" Width="100" Click="Button_DodajK_Click"/>
+        <Button Content="Powrot" HorizontalAlignment="Left" Height="40" Margin="620,320,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click"/>
 
     </Grid>
 </Window>

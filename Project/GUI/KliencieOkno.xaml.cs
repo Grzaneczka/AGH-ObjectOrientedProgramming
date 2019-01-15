@@ -38,6 +38,10 @@ namespace GUI
             okno.ShowDialog();
             
         }
-        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -22,6 +22,18 @@ namespace GUI
         public Pracownicy()
         {
             InitializeComponent();
+            ListBox_Pracownicy.ItemsSource = MainWindow.ListaPracownikow;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DodajPracownika okno = new DodajPracownika();
+            okno.ShowDialog();
         }
     }
 }

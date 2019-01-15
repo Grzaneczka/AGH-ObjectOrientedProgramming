@@ -21,6 +21,8 @@
             <ComboBoxItem x:Name="M">mężczyzna</ComboBoxItem>
         </ComboBox>
         <Button x:Name="Button_ZatwierdzK" Content="Zatwierdz" HorizontalAlignment="Left" Height="40" Margin="25,395,0,0" VerticalAlignment="Top" Width="110" Click="Button_ZatwierdzK_Click"/>
+        <Label Content="Pracownik:" HorizontalAlignment="Left" Height="35" Margin="25,220,0,0" VerticalAlignment="Top" Width="110"/>
+        <ComboBox x:Name="ComboBox_PracownikK" HorizontalAlignment="Left" Height="30" Margin="170,225,0,0" VerticalAlignment="Top" Width="115"/>
 
     </Grid>
 </Window>

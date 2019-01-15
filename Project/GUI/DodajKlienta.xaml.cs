@@ -25,6 +25,7 @@ namespace GUI
         public DodajKlienta()
         {
             InitializeComponent();
+            ComboBox_PracownikK.ItemsSource = MainWindow.ListaPracownikow;
         }
 
         private void Button_ZatwierdzK_Click(object sender, RoutedEventArgs e)

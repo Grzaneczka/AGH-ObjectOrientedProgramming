@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="Rezerwacje" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="Lista rezerwacji" HorizontalAlignment="Left" Height="55" Margin="35,10,0,0" VerticalAlignment="Top" Width="200"/>
+        <ListBox x:Name="ListBox_Rezerwacje" HorizontalAlignment="Left" Height="170" Margin="10,65,0,0" VerticalAlignment="Top" Width="390"/>
+        <Button x:Name="Button_DodajRezerwacje" Content="Dodaj" HorizontalAlignment="Left" Height="40" Margin="35,335,0,0" VerticalAlignment="Top" Width="90" Click="Button_DodajRezerwacje_Click"/>
+        <Button Content="Powrot" HorizontalAlignment="Left" Height="40" Margin="595,335,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
+
     </Grid>
 </Window>

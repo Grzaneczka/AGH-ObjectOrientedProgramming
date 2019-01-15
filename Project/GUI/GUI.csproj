@@ -74,10 +74,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DodajPracownika.xaml.cs">
+      <DependentUpon>DodajPracownika.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DodajRezerwacje.xaml.cs">
+      <DependentUpon>DodajRezerwacje.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Rezerwacje.xaml.cs">
       <DependentUpon>Rezerwacje.xaml</DependentUpon>
     </Compile>
     <Page Include="DodajKlienta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DodajPracownika.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DodajRezerwacje.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

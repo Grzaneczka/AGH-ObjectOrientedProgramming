@@ -22,6 +22,18 @@ namespace GUI
         public Rezerwacje()
         {
             InitializeComponent();
+            ListBox_Rezerwacje.ItemsSource = MainWindow.ListaRezerwacji;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_DodajRezerwacje_Click(object sender, RoutedEventArgs e)
+        {
+            DodajRezerwacje okno = new DodajRezerwacje();
+            okno.ShowDialog();
         }
     }
 }

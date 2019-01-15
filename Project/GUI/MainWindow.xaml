@@ -11,6 +11,7 @@
         <Button x:Name="Button_Klienci" Content="Klienci" HorizontalAlignment="Left" Height="50" Margin="55,85,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
         <Button x:Name="Button_Pracownicy" Content="Pracownicy" HorizontalAlignment="Left" Height="50" Margin="55,165,0,0" VerticalAlignment="Top" Width="100" Click="OpenEmployee"/>
         <Button x:Name="Button_Rezerwacje" Content="Rezerwacje" HorizontalAlignment="Left" Height="50" Margin="55,245,0,0" VerticalAlignment="Top" Width="100" Click="OpenReservations"/>
+        <Button Content="Wyjscie" HorizontalAlignment="Left" Height="35" Margin="580,325,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_1"/>
 
     </Grid>
 </Window>
