@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class WrongCheckOutException : Exception
+    public class WrongCheckOutException : Exception
     {
         public WrongCheckOutException() : base("Not all payments have been settled ")
         {

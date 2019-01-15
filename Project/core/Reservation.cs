@@ -121,6 +121,7 @@ namespace Project
 
         public void CheckOut() 
         {
+           
             this.IsCheckOut = true;
 
             foreach (Room room in rooms)

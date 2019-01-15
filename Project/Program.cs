@@ -31,6 +31,8 @@ namespace Project
 
             hotel.AddSinglePayment(client1, singlePayment);
 
+            
+
             Console.WriteLine(hotel);
 
             Console.WriteLine("-----------------ACCOUNTS--------------------------------");
