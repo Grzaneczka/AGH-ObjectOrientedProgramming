@@ -25,18 +25,22 @@ namespace GUI
         
         public KliencieOkno()
         {
-            InitializeComponent();            
-            ListBox_ListaKlientow.ItemsSource = MainWindow.ListaKlientow;
+            InitializeComponent();
+            UpdateList();
             
-            
+        }
+
+        public void UpdateList()
+        {
+            ListBox_ListaKlientow.ItemsSource = null;
+            ListBox_ListaKlientow.ItemsSource = MainWindow.h1.Clients;
         }
 
         private void Button_DodajK_Click(object sender, RoutedEventArgs e)
         {
-            Client k = new Client();
-            DodajKlienta okno = new DodajKlienta();
-            okno.ShowDialog();
-            
+            DodajKlienta child = new DodajKlienta(this);
+            child.ShowDialog();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

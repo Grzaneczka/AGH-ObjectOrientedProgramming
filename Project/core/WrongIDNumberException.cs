@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class WrongIDNumberException : FormatException
+    public class WrongIDNumberException : FormatException
     {
         readonly string idNumber;
 
