@@ -22,7 +22,7 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static Hotel h1 = (Hotel)Hotel.ReadXML("C:/Users/DELL/Desktop/C#/AGH-ObjectOrientedProgramming/Project/bin/Debug/hotel.xml");
+        public static Hotel h1 = (Hotel)Hotel.ReadXML("C:/Users/Bartek Kalata/source/repos/AGH-ObjectOrientedProgramming/Project/bin/Debug/hotel.xml");
         public static List<Client> ListaKlientow = h1.Clients;
 
         
@@ -38,7 +38,17 @@ namespace GUI
             KliencieOkno okno = new KliencieOkno();
             okno.ShowDialog();
         }
+        private void OpenEmployee(object sender, RoutedEventArgs e)
+        {
+            Pracownicy okno = new Pracownicy();
+            okno.ShowDialog();
+        }
 
-        
+        private void OpenReservations(object sender, RoutedEventArgs e)
+        {
+           Rezerwacje okno = new Rezerwacje();
+            okno.ShowDialog();
+        }
+
     }
 }

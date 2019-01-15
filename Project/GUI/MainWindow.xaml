@@ -9,8 +9,8 @@
     <Grid>
         <Label Content="HOTEL" FontSize="30" Margin="0,10,350,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.868" HorizontalAlignment="Right"/>
         <Button x:Name="Button_Klienci" Content="Klienci" HorizontalAlignment="Left" Height="50" Margin="55,85,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click"/>
-        <Button x:Name="Button_Pracownicy" Content="Pracownicy" HorizontalAlignment="Left" Height="50" Margin="55,165,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="Button_Rezerwacje" Content="Rezerwacje" HorizontalAlignment="Left" Height="50" Margin="55,245,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="Button_Pracownicy" Content="Pracownicy" HorizontalAlignment="Left" Height="50" Margin="55,165,0,0" VerticalAlignment="Top" Width="100" Click="OpenEmployee"/>
+        <Button x:Name="Button_Rezerwacje" Content="Rezerwacje" HorizontalAlignment="Left" Height="50" Margin="55,245,0,0" VerticalAlignment="Top" Width="100" Click="OpenReservations"/>
 
     </Grid>
 </Window>
