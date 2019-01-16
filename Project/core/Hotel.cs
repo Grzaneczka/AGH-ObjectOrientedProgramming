@@ -63,7 +63,7 @@ namespace Project
             Reservation reservation = new Reservation(title, client, checkInDate, checkOutDate, numberOfAdults, numberOfChildren, numberOfBabies, false, false, false);
             reservations.Add(reservation);
             reservation.AddRoom(room);
-            accounts.Find(a => a.Client == client).AddPayment(reservation);
+            accounts.Find(a => a.Client.IDNumer == client.IDNumer).AddPayment(reservation);
 
             string contents = "Create reservation: " + title;
             AddLog(employee, LogType.CREATE_RESERWATION, contents);

@@ -38,19 +38,11 @@ namespace GUI
         {
             try
             {
-
-                DateTime zameldowanie;
-                DateTime wymeldowanie;
-                DateTime.TryParseExact(TextBox_Zameldowanie.Text, new[] { "yyyy-MM-dd", "yyyy/MM/dd",
-                "MM/dd/yy", "dd-MMM-yy" }, null, DateTimeStyles.None, out zameldowanie);
-                DateTime.TryParseExact(TextBox_Wymeldowanie.Text, new[] { "yyyy-MM-dd", "yyyy/MM/dd",
-                "MM/dd/yy", "dd-MMM-yy" }, null, DateTimeStyles.None, out wymeldowanie);
-
                 MainWindow.h1.CreateReservation(
                     TextBox_TytulR.Text,
                     Klient(),
-                    zameldowanie.ToString(),
-                    wymeldowanie.ToString(),
+                    TextBox_Zameldowanie.Text,
+                    TextBox_Wymeldowanie.Text,
                     LiczbaDoroslych(),
                     LiczbaDzieci(),
                     LiczbaNiemowlat(),
@@ -97,14 +89,12 @@ namespace GUI
             return y;
 
         }
+
         private Client Klient()
         {
-            Client x = new Client();
-            var p = ComboBox_KlientR.SelectedItem;
-            x = (Client)p;
-            return (Client)p;
-
+            return (Client)ComboBox_KlientR.SelectedItem;
         }
+
         private Employee Pracownik()
         {
             Employee x = new Employee();
