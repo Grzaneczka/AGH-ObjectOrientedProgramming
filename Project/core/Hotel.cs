@@ -123,7 +123,7 @@ namespace Project
 
         public void ChecOut(Reservation reservation, Employee employee)
         {
-            if (accounts.Find(a => a.Client == reservation.Client).AccountDebt() == 0)
+            if (accounts.Find(a => a.Client.IDNumer == reservation.Client.IDNumer).AccountDebt() == 0)
             {
                 reservation.CheckOut();
 
@@ -219,7 +219,7 @@ namespace Project
 
         public void AddSinglePayment(Client client, SinglePayment singlePayment)
         {
-            accounts.Find(a => a.Client == client).AddPayment(singlePayment);
+            accounts.Find(a => a.Client.IDNumer == client.IDNumer).AddPayment(singlePayment);
         }
 
         // To string
