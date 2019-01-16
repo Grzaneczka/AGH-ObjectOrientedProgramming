@@ -8,7 +8,6 @@
         Title="DodajRezerwacje" Height="450" Width="800">
     <Grid>
         <Label Content="Tytuł:" HorizontalAlignment="Left" Height="30" Margin="45,30,0,0" VerticalAlignment="Top" Width="95"/>
-        <ComboBox x:Name="ComboBox_KlientR" HorizontalAlignment="Left" Height="35" Margin="205,70,0,0" VerticalAlignment="Top" Width="200"/>
         <Label Content="Klient:" HorizontalAlignment="Left" Height="30" Margin="45,70,0,0" VerticalAlignment="Top" Width="95"/>
         <Label Content="Pracownik:" HorizontalAlignment="Left" Height="35" Margin="45,105,0,0" VerticalAlignment="Top" Width="95"/>
         <ComboBox x:Name="ComboBoxPracownikR" HorizontalAlignment="Left" Height="30" Margin="205,110,0,0" VerticalAlignment="Top" Width="200"/>
@@ -25,7 +24,8 @@
         <TextBox x:Name="TextBox_LD1" HorizontalAlignment="Left" Height="28" Margin="205,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
         <TextBox x:Name="TextBox_LDzieci" HorizontalAlignment="Left" Height="25" Margin="205,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
         <TextBox x:Name="TextBox_LN" HorizontalAlignment="Left" Height="30" Margin="205,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-        <Button Content="Zatwierdz" HorizontalAlignment="Left" Height="34" Margin="140,375,0,0" VerticalAlignment="Top" Width="110"/>
+        <Button x:Name="Button_ZatwierdzR" Content="Zatwierdz" HorizontalAlignment="Left" Height="34" Margin="140,375,0,0" VerticalAlignment="Top" Width="110" Click="Button_ZatwierdzR_Click"/>
+        <ComboBox x:Name="ComboBox_KlientR" HorizontalAlignment="Left" Height="30" Margin="205,70,0,0" VerticalAlignment="Top" Width="200"/>
 
     </Grid>
 </Window>

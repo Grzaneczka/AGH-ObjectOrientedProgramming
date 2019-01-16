@@ -20,7 +20,9 @@ namespace GUI
     /// </summary>
     public partial class DodajKlienta : Window
     {
+       
         private KliencieOkno parentWindow;
+        
 
         public DodajKlienta(KliencieOkno parentWindow)
         {
@@ -33,7 +35,7 @@ namespace GUI
         {
             try
             {
-                MainWindow.h1.CreateClient(
+                 MainWindow.h1.CreateClient(
                     TextBox_ImieK.Text,
                     TextBox_NazwK.Text,
                     TextBox_TelK.Text,
@@ -43,24 +45,29 @@ namespace GUI
                     null // nie obslugujemy logowania do aplikacji wiec mozna pracownika rownie dobrze ustawic na null
                 );
                 parentWindow.UpdateList();
+                
+                
                 this.Close();
             }
             catch (WrongPhoneException exc)
             {
-                // TODO: display error in GUI
+                MessageBox.Show("Bledny numer telefonu!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (WrongEmailException exc)
             {
-                // TODO: display error in GUI
+                MessageBox.Show("Bledny adres email!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (WrongIDNumberException exc)
             {
-                // TODO: display error in GUI
+                MessageBox.Show("Bledny numer dowodu!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (MissingFieldException exc)
             {
-                // TODO: display error in GUI
+                MessageBox.Show("Brak danych!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            
+            
         }
 
         private Sex GetSex()
@@ -75,6 +82,8 @@ namespace GUI
                     throw new MissingFieldException();
             }
         }
+
+        
 
     }
 }

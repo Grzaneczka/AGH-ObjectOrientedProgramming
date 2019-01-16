@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Project;
 
 namespace GUI
 {
@@ -22,7 +23,13 @@ namespace GUI
         public Pracownicy()
         {
             InitializeComponent();
-            ListBox_Pracownicy.ItemsSource = MainWindow.ListaPracownikow;
+            UpdateList();            
+        }
+
+        public void UpdateList()
+        {
+            ListBox_Pracownicy.ItemsSource = null;
+            ListBox_Pracownicy.ItemsSource = MainWindow.h1.Employees;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -32,7 +39,7 @@ namespace GUI
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            DodajPracownika okno = new DodajPracownika();
+            DodajPracownika okno = new DodajPracownika(this);
             okno.ShowDialog();
         }
     }

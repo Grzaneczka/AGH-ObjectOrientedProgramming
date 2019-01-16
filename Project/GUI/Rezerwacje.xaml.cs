@@ -22,7 +22,13 @@ namespace GUI
         public Rezerwacje()
         {
             InitializeComponent();
-            ListBox_Rezerwacje.ItemsSource = MainWindow.ListaRezerwacji;
+            UpdateList();
+        }
+
+        public void UpdateList()
+        {
+            ListBox_Rezerwacje.ItemsSource = null;
+            ListBox_Rezerwacje.ItemsSource = MainWindow.h1.Reservations;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -32,7 +38,7 @@ namespace GUI
 
         private void Button_DodajRezerwacje_Click(object sender, RoutedEventArgs e)
         {
-            DodajRezerwacje okno = new DodajRezerwacje();
+            DodajRezerwacje okno = new DodajRezerwacje(this);
             okno.ShowDialog();
         }
     }
