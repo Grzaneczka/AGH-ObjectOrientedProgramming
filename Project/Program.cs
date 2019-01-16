@@ -12,11 +12,11 @@ namespace Project
     {
         static void Main(string[] args)
         {
-            Employee employee = new Employee("Karolina", "Grzanka","879-987-987", Sex.Woman, "Administrator");
-
             Console.WriteLine("-----------------HOTEL--------------------------------");
 
             Hotel hotel = new Hotel("NAJLEPSZY HOTEL NA ŚWIACIE");
+
+            Employee employee = hotel.CreateEmplyee("Karolina", "Grzanka", "879-987-987", Sex.Woman, "Administrator");
 
             Room room01 = hotel.CreateRoom(01, 0, 1, false, employee);
             Room room02 = hotel.CreateRoom(02, 1, 1, false, employee);
