@@ -30,7 +30,6 @@ namespace Project
             using (SQLiteConnection connection = new SQLiteConnection(LoadConnectionString()))
             {
                 // otwieram polaczenie z baza danych
-                // pozniej automatycznie zostanie zamkniete
                 connection.Open();
                 using (SQLiteCommand command = connection.CreateCommand())
                 {
@@ -52,7 +51,119 @@ namespace Project
                         table.Add(row);
                     }
                 }
+                // zamykam polaczenie z baza danych
+                connection.Close();
                 return table;
+            }
+        }
+
+
+        /*
+         * FUNKCJE WPROWADZAJACE DANE DO BAZY
+         */
+
+        public static void InsertEmployee(Employee employee)
+        {
+            using(SQLiteConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                connection.Open();
+                using(SQLiteCommand command = connection.CreateCommand())
+                {
+                    command.CommandType = CommandType.Text;
+                    command.CommandText = "INSERT INTO Employees (Name, Surname, Phone, Sex, Function) VALUES (@p1, @p2, @p3, @p4, @p5)";
+
+                    command.Parameters.Add(new SQLiteParameter("@p1", employee.Name));
+                    command.Parameters.Add(new SQLiteParameter("@p2", employee.Surname));
+                    command.Parameters.Add(new SQLiteParameter("@p3", employee.Phone));
+                    command.Parameters.Add(new SQLiteParameter("@p4", employee.Sex.ToString()));
+                    command.Parameters.Add(new SQLiteParameter("@p5", employee.Function));
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+                }
+                connection.Close();
+            }
+        }
+
+        public static void InsertClient(Client client)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                connection.Open();
+                using (SQLiteCommand command = connection.CreateCommand())
+                {
+                    command.CommandType = CommandType.Text;
+                    command.CommandText = "INSERT INTO Clients (Name, Surname, Phone, Sex, Email, IdNumber) VALUES (@p1,@p2,@p3,@p4,@p5,@p6)";
+
+                    command.Parameters.Add(new SQLiteParameter("@p1", client.Name));
+                    command.Parameters.Add(new SQLiteParameter("@p2", client.Surname));
+                    command.Parameters.Add(new SQLiteParameter("@p3", client.Phone));
+                    command.Parameters.Add(new SQLiteParameter("@p4", client.Sex.ToString()));
+                    command.Parameters.Add(new SQLiteParameter("@p5", client.Email));
+                    command.Parameters.Add(new SQLiteParameter("@p6", client.IDNumer));
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+                }
+                connection.Close();
+            }
+        }
+        
+        public static void InsertRoom(Room room)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                connection.Open();
+                using (SQLiteCommand command = connection.CreateCommand())
+                {
+                    command.CommandType = CommandType.Text;
+                    command.CommandText = "INSERT INTO Clients (RoomNumber, SingleBeds, MarriageBeds, IsBalcony, IsClear, IsFree) VALUES (@p1,@p2,@p3,@p4,@p5,@p6)";
+
+                    command.Parameters.Add(new SQLiteParameter("@p1", room.RoomNumber));
+                    command.Parameters.Add(new SQLiteParameter("@p2", room.NumberOfSingleBeds));
+                    command.Parameters.Add(new SQLiteParameter("@p3", room.NumberOfMarriageBeds));
+                    command.Parameters.Add(new SQLiteParameter("@p4", room.IsBalcony));
+                    command.Parameters.Add(new SQLiteParameter("@p5", room.IsClear));
+                    command.Parameters.Add(new SQLiteParameter("@p6", room.IsFree));
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+                }
+                connection.Close();
+            }
+        }
+
+        public static void InsertSinglePayment(SinglePayment singlePayment)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                connection.Open();
+                using (SQLiteCommand command = connection.CreateCommand())
+                {
+                    command.CommandType = CommandType.Text;
+                    command.CommandText = "INSERT INTO SinglePayment (Name, Price, Quantity) VALUES (@p1, @p2, @p3)";
+
+                    command.Parameters.Add(new SQLiteParameter("@p1", singlePayment.Title));
+                    command.Parameters.Add(new SQLiteParameter("@p2", singlePayment.Price));
+                    command.Parameters.Add(new SQLiteParameter("@p3", singlePayment.Quantity));
+                }
+                connection.Close();
             }
         }
 
@@ -77,9 +188,6 @@ namespace Project
                         break;
                     case "Woman":
                         tmp_sex = Sex.Woman;
-                        break;
-                    case "Company":
-                        tmp_sex = Sex.Company;
                         break;
                     default:
                         tmp_sex = Sex.Unknown;
@@ -111,9 +219,6 @@ namespace Project
                     case "Woman":
                         tmp_sex = Sex.Woman;
                         break;
-                    case "Company":
-                        tmp_sex = Sex.Company;
-                        break;
                     default:
                         tmp_sex = Sex.Unknown;
                         break;
@@ -138,8 +243,9 @@ namespace Project
                 int tmp_mariage = Int32.Parse(row[2]);
                 bool tmp_balcony = TrueOrFalse(row[3]);
                 bool tmp_clear = TrueOrFalse(row[4]);
+                bool tmp_free = TrueOrFalse(row[5]);
 
-                Room tmp_room = new Room(tmp_number, tmp_single, tmp_mariage, tmp_balcony, tmp_clear);
+                Room tmp_room = new Room(tmp_number, tmp_single, tmp_mariage, tmp_balcony, tmp_clear, tmp_free);
                 AllRooms.Add(tmp_room);
             }
             return AllRooms;
@@ -154,70 +260,14 @@ namespace Project
                 string tmp_name = row[1];
                 double tmp_price = Double.Parse(row[2]);
                 double tmp_quantity = Double.Parse(row[3]);
-                bool tmp_paid = TrueOrFalse(row[4]);
-                DateTime tmp_date = DateTime.Parse(row[5]);
 
-                SinglePayment tmp_payment = new SinglePayment(tmp_name, tmp_price, tmp_quantity, tmp_paid);
+                SinglePayment tmp_payment = new SinglePayment(tmp_name, tmp_price, tmp_quantity);
                 Allpayments.Add(tmp_payment);
             }
             return Allpayments;
         }
 
-        // ta funkcja działa
-        public static List<Employee> LoadAllEmployees()
-        {
-            List<Employee> output = new List<Employee>();
-
-            // tworzę nowe połączenie z bazą danych
-            // używam metody "using" aby w razie błędnego polecenia nie pozostawić po crashu otwartego połączenia
-            using (SQLiteConnection connection = new SQLiteConnection(LoadConnectionString()))
-            {
-                connection.Open();
-
-                using (SQLiteCommand command = connection.CreateCommand())
-                {
-                    command.CommandText = @"SELECT * FROM Employees";
-                    command.CommandType = CommandType.Text;
-
-                    SQLiteDataReader reader = command.ExecuteReader();
-
-
-                    while (reader.Read())
-                    {
-                        string tmp_name = reader.GetString(1);
-                        string tmp_surname = reader.GetString(2);
-                        string tmp_phone = reader.GetString(3);
-
-                        Sex tmp_sex;
-                        switch (reader.GetString(4))
-                        {
-                            case "Man":
-                                tmp_sex = Sex.Man;
-                                break;
-                            case "Woman":
-                                tmp_sex = Sex.Woman;
-                                break;
-                            case "Company":
-                                tmp_sex = Sex.Company;
-                                break;
-                            default:
-                                tmp_sex = Sex.Unknown;
-                                break;
-                        }
-
-                        string tmp_function = reader.GetString(5);
-
-
-                        Employee tmp_empoloyee = new Employee(tmp_name, tmp_surname, tmp_phone, tmp_sex, tmp_function);
-
-                        output.Add(tmp_empoloyee);
-                    }
-                }
-
-                return output;
-            }
-        }
-
+     
         static bool TrueOrFalse(string str)
         {
             if (str == "True"   ||

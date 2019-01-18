@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class WrongPhoneException : FormatException
+    public class WrongPhoneException : FormatException
     {
         readonly string phone;
 

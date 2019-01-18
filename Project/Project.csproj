@@ -70,6 +70,7 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\System.Data.SQLite.Linq.1.0.109.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.SqlXml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,7 +79,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="core\Contig.cs" />
+    <Compile Include="core\Account.cs" />
+    <Compile Include="core\Config.cs" />
     <Compile Include="core\Client.cs" />
     <Compile Include="core\Employee.cs" />
     <Compile Include="core\Person.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="core\Payment.cs" />
     <Compile Include="core\Hotel.cs" />
     <Compile Include="core\WrongCheckOutException.cs" />
+    <Compile Include="core\Log.cs" />
     <Compile Include="core\sql.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

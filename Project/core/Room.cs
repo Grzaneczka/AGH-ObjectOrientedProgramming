@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class Room
+    [Serializable]
+
+    public class Room : ICloneable
     {
         private int roomNumber;
         private int numberOfSingleBeds;
@@ -16,16 +18,21 @@ namespace Project
         private bool isClear;
         private bool isFree;
 
-       // Konstruktory 
+        // Konstruktory 
 
-        public Room(int roomNumber, int numberOfSingleBeds, int numberOfMarriageBeds, bool isBalcony, bool isClear)
+        public Room()
+        {
+
+        }
+
+        public Room(int roomNumber, int numberOfSingleBeds, int numberOfMarriageBeds, bool isBalcony, bool isClear, bool isFree)
         {
             this.roomNumber = roomNumber;
             this.numberOfSingleBeds = numberOfSingleBeds;
             this.numberOfMarriageBeds = numberOfMarriageBeds;
             this.isBalcony = isBalcony;
             this.isClear = isClear;
-            this.isFree = true;
+            this.isFree = isFree;
         }
 
         // Getery i Setery 
@@ -46,9 +53,14 @@ namespace Project
 
         public int NumberOfPeople()
         {
-            return (numberOfSingleBeds * 1 + numberOfMarriageBeds * 2);
+            return (numberOfSingleBeds + numberOfMarriageBeds * 2);
         }
-        
+
+        public object Clone()
+        {
+            return (Room)this.MemberwiseClone();
+        }
+
         // To string 
 
         public override string ToString()

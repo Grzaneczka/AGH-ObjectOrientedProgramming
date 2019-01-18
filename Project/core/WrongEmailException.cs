@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class WrongEmailException : FormatException
+    public class WrongEmailException : FormatException
     {
         readonly string email;
 

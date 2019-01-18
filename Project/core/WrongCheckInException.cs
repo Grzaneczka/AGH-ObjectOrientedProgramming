@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class WrongCheckInException : Exception
+    public class WrongCheckInException : Exception
     {
         public WrongCheckInException() : base("Advance not paid ")
         {

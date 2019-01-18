@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    class Employee : Person
+    [Serializable]
+
+    public class Employee : Person
     {
-        string function;
+        private string function;
 
         // Konstruktory 
+
+        public Employee() : base()
+        {
+
+        }
 
         public Employee(string name, string surname, string phone, Sex sex, string function) : base(name, surname, sex, phone)
         {

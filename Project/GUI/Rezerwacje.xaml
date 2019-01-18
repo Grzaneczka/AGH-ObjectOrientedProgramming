@@ -1,0 +1,16 @@
+﻿<Window x:Class="GUI.Rezerwacje"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        mc:Ignorable="d"
+        Title="Rezerwacje" Height="450" Width="800">
+    <Grid Background="#FF075539">
+        <Label Content="Lista rezerwacji" HorizontalAlignment="Left" Height="110" Margin="117,10,0,0" VerticalAlignment="Top" Width="541" FontWeight="Bold" FontSize="72"/>
+        <ListBox x:Name="ListBox_Rezerwacje" HorizontalAlignment="Left" Height="205" Margin="0,125,0,0" VerticalAlignment="Top" Width="792" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="Button_DodajRezerwacje" Content="Dodaj" HorizontalAlignment="Left" Height="40" Margin="77,350,0,0" VerticalAlignment="Top" Width="90" Click="Button_DodajRezerwacje_Click" FontWeight="Bold" Background="#FF645858"/>
+        <Button Content="Powrot" HorizontalAlignment="Left" Height="40" Margin="589,350,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click" FontWeight="Bold" Background="#FF645858"/>
+
+    </Grid>
+</Window>

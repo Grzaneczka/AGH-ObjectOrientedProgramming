@@ -1,0 +1,17 @@
+﻿<Window x:Class="GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#FF075539">
+        <Label Content="HOTEL" FontSize="72" Margin="0,10,270,0" VerticalAlignment="Top" RenderTransformOrigin="0.543,0.868" HorizontalAlignment="Right" FontWeight="Bold" Height="108" Width="249"/>
+        <Button x:Name="Button_Klienci" Content="Klienci" HorizontalAlignment="Left" Height="50" Margin="55,85,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click" Background="#FF645757" FontWeight="Bold"/>
+        <Button x:Name="Button_Pracownicy" Content="Pracownicy" HorizontalAlignment="Left" Height="50" Margin="55,165,0,0" VerticalAlignment="Top" Width="100" Click="OpenEmployee" Background="#FF645757" FontWeight="Bold"/>
+        <Button x:Name="Button_Rezerwacje" Content="Rezerwacje" HorizontalAlignment="Left" Height="50" Margin="55,245,0,0" VerticalAlignment="Top" Width="100" Click="OpenReservations" Background="#FF645757" FontWeight="Bold"/>
+        <Button Content="Wyjscie" HorizontalAlignment="Left" Height="35" Margin="580,325,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_1" Background="#FF645757" FontWeight="Bold"/>
+
+    </Grid>
+</Window>
