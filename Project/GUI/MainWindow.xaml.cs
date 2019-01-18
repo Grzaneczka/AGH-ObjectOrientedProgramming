@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace GUI
 {
@@ -22,7 +23,10 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static Hotel h1 = Hotel.ReadXML("C:/Users/fifik/source/repos/AGH-ObjectOrientedProgramming2/Project/bin/Debug/hotel.xml");
+        public static string dir = Environment.CurrentDirectory;
+        // automatycznie generuję scieżkę do hotel.xaml
+        // trochę nieładnie ale działa
+        public static Hotel h1 = Hotel.ReadXML(dir.Remove(dir.Length - 13, 3) + "/hotel.xml");
         public static List<Client> ListaKlientow = h1.Clients;
         public static List<Employee> ListaPracownikow = h1.Employees;
         public static List<Reservation> ListaRezerwacji = h1.Reservations;
@@ -33,7 +37,6 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
       
