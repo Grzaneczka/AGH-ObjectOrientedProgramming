@@ -6,17 +6,17 @@
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
         Title="DodajPracownika" Height="450" Width="800">
-    <Grid>
-        <Label Content="Imie:" HorizontalAlignment="Left" Height="30" Margin="45,45,0,0" VerticalAlignment="Top" Width="90"/>
-        <Label Content="Nazwisko:" HorizontalAlignment="Left" Height="30" Margin="45,75,0,0" VerticalAlignment="Top" Width="90"/>
-        <Label Content="Plec:" HorizontalAlignment="Left" Height="30" Margin="45,110,0,0" VerticalAlignment="Top" Width="90"/>
-        <Label Content="Tel:" HorizontalAlignment="Left" Height="30" Margin="45,145,0,0" VerticalAlignment="Top" Width="90"/>
-        <Label Content="Funkcja:" HorizontalAlignment="Left" Height="30" Margin="45,175,0,0" VerticalAlignment="Top" Width="90"/>
+    <Grid Background="#FF075539">
+        <Label Content="Imie:" HorizontalAlignment="Left" Height="30" Margin="45,45,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
+        <Label Content="Nazwisko:" HorizontalAlignment="Left" Height="30" Margin="45,75,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
+        <Label Content="Plec:" HorizontalAlignment="Left" Height="30" Margin="45,110,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
+        <Label Content="Tel:" HorizontalAlignment="Left" Height="30" Margin="45,145,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
+        <Label Content="Funkcja:" HorizontalAlignment="Left" Height="30" Margin="45,175,0,0" VerticalAlignment="Top" Width="90" FontWeight="Bold"/>
         <ComboBox x:Name="ComboBox_PlecK" HorizontalAlignment="Left" Height="25" Margin="175,115,0,0" VerticalAlignment="Top" Width="115" >
             <ComboBoxItem x:Name="K">kobieta</ComboBoxItem>
             <ComboBoxItem x:Name="M">mężczyzna</ComboBoxItem>
         </ComboBox>
-        <Button x:Name="Button_ZatwierdzP" Content="Zatwierdz" HorizontalAlignment="Left" Height="45" Margin="75,335,0,0" VerticalAlignment="Top" Width="115" Click="Button_ZatwierdzP_Click"/>
+        <Button x:Name="Button_ZatwierdzP" Content="Zatwierdz" HorizontalAlignment="Left" Height="45" Margin="75,335,0,0" VerticalAlignment="Top" Width="115" Click="Button_ZatwierdzP_Click" Background="#FF645757" FontWeight="Bold"/>
         <TextBox x:Name="TextBox_NazwiskoP" HorizontalAlignment="Left" Height="30" Margin="175,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
         <TextBox x:Name="TextBox_ImieP" HorizontalAlignment="Left" Height="25" Margin="175,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
         <TextBox x:Name="TextBox_TelP" HorizontalAlignment="Left" Height="25" Margin="175,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>

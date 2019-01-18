@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
         Title="DodajKlienta" Height="502" Width="449">
-    <Grid>
-        <Label Content="Imie:" HorizontalAlignment="Left" Height="30" Margin="25,30,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Nazwisko:" HorizontalAlignment="Left" Height="35" Margin="25,65,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Tel:" HorizontalAlignment="Left" Height="35" Margin="25,105,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="E-mail:" HorizontalAlignment="Left" Height="35" Margin="25,145,0,0" VerticalAlignment="Top" Width="110"/>
-        <Label Content="Plec:" HorizontalAlignment="Left" Height="35" Margin="25,185,0,0" VerticalAlignment="Top" Width="110"/>
+    <Grid OpacityMask="#FF075539" Background="#FF075539">
+        <Label Content="Imie:" HorizontalAlignment="Left" Height="30" Margin="25,30,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
+        <Label Content="Nazwisko:" HorizontalAlignment="Left" Height="35" Margin="25,65,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
+        <Label Content="Tel:" HorizontalAlignment="Left" Height="35" Margin="25,105,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
+        <Label Content="E-mail:" HorizontalAlignment="Left" Height="35" Margin="25,145,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
+        <Label Content="Plec:" HorizontalAlignment="Left" Height="35" Margin="25,185,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <TextBox x:Name="TextBox_ImieK" HorizontalAlignment="Left" Height="30" Margin="170,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
         <TextBox x:Name="TextBox_NazwK" HorizontalAlignment="Left" Height="30" Margin="170,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
         <TextBox x:Name="TextBox_TelK" HorizontalAlignment="Left" Height="30" Margin="170,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
@@ -20,8 +20,8 @@
             <ComboBoxItem x:Name="K">kobieta</ComboBoxItem>
             <ComboBoxItem x:Name="M">mężczyzna</ComboBoxItem>
         </ComboBox>
-        <Button x:Name="Button_ZatwierdzK" Content="Zatwierdz" HorizontalAlignment="Left" Height="40" Margin="25,395,0,0" VerticalAlignment="Top" Width="110" Click="Button_ZatwierdzK_Click"/>
-        <Label Content="Nr dowodu" HorizontalAlignment="Left" Height="27" Margin="25,225,0,0" VerticalAlignment="Top" Width="110"/>
+        <Button x:Name="Button_ZatwierdzK" Content="Zatwierdz" HorizontalAlignment="Left" Height="40" Margin="25,395,0,0" VerticalAlignment="Top" Width="110" Click="Button_ZatwierdzK_Click" Background="#FF645757" FontWeight="Bold"/>
+        <Label Content="Nr dowodu" HorizontalAlignment="Left" Height="27" Margin="25,225,0,0" VerticalAlignment="Top" Width="110" FontWeight="Bold"/>
         <TextBox x:Name="TextBox_NrDow" HorizontalAlignment="Left" Height="27" Margin="170,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
 
     </Grid>

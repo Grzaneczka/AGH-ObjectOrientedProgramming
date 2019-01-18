@@ -22,7 +22,7 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static Hotel h1 = Hotel.ReadXML("C:/Users/DELL/Desktop/C#/AGH-ObjectOrientedProgramming/Project/bin/Debug/hotel.xml");
+        public static Hotel h1 = Hotel.ReadXML("C:/Users/fifik/source/repos/AGH-ObjectOrientedProgramming2/Project/bin/Debug/hotel.xml");
         public static List<Client> ListaKlientow = h1.Clients;
         public static List<Employee> ListaPracownikow = h1.Employees;
         public static List<Reservation> ListaRezerwacji = h1.Reservations;

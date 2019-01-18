@@ -42,5 +42,10 @@ namespace GUI
             DodajPracownika okno = new DodajPracownika(this);
             okno.ShowDialog();
         }
+
+        private void ListBox_Pracownicy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

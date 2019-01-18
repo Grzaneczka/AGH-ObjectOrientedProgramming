@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
         Title="Pracownicy" Height="450" Width="800">
-    <Grid>
-        <Label Content="Lista pracownikow" HorizontalAlignment="Left" Height="40" Margin="45,10,0,0" VerticalAlignment="Top" Width="180"/>
-        <ListBox x:Name="ListBox_Pracownicy" HorizontalAlignment="Left" Height="255" Margin="45,70,0,0" VerticalAlignment="Top" Width="285"/>
-        <Button Content="Powrot" HorizontalAlignment="Left" Height="40" Margin="650,350,0,0" VerticalAlignment="Top" Width="90" Click="Button_Click"/>
-        <Button Content="Dodaj" HorizontalAlignment="Left" Height="40" Margin="40,350,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click_1"/>
+    <Grid Background="#FF075539">
+        <Label Content="Lista pracownikow" HorizontalAlignment="Left" Height="99" Margin="86,10,0,0" VerticalAlignment="Top" Width="674" FontWeight="Bold" FontSize="72"/>
+        <ListBox x:Name="ListBox_Pracownicy" HorizontalAlignment="Left" Height="166" Margin="0,152,0,0" VerticalAlignment="Top" Width="792" SelectionChanged="ListBox_Pracownicy_SelectionChanged" FontSize="16" FontWeight="Bold"/>
+        <Button Content="Powrot" HorizontalAlignment="Left" Height="40" Margin="650,350,0,0" VerticalAlignment="Top" Width="90" Click="Button_Click" FontWeight="Bold" BorderBrush="#FF463E3E" Background="#FF5F5555"/>
+        <Button Content="Dodaj" HorizontalAlignment="Left" Height="40" Margin="40,350,0,0" VerticalAlignment="Top" Width="105" Click="Button_Click_1" FontWeight="Bold" Background="#FF645858"/>
 
     </Grid>
 </Window>
