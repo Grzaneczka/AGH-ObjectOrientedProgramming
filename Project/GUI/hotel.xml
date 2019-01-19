@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Hotel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>NAJLEPSZY HOTEL NA ŚWIACIE</Name>
+  <Reservations>
+    <Reservation>
+      <Title>Reservation room 1 28/09/2019 - 30/09/2019</Title>
+      <IsPaid>false</IsPaid>
+      <CheckInDate>2019-09-28T00:00:00</CheckInDate>
+      <CheckOutDate>2019-09-30T00:00:00</CheckOutDate>
+      <NumberOfAdults>2</NumberOfAdults>
+      <NumberOfChildren>0</NumberOfChildren>
+      <NumberOfBabies>0</NumberOfBabies>
+      <IsCheckIn>false</IsCheckIn>
+      <IsCheckOut>false</IsCheckOut>
+      <Canceled>false</Canceled>
+      <Rooms>
+        <Room>
+          <RoomNumber>1</RoomNumber>
+          <NumberOfSingleBeds>0</NumberOfSingleBeds>
+          <NumberOfMarriageBeds>1</NumberOfMarriageBeds>
+          <IsBalcony>false</IsBalcony>
+          <IsClear>false</IsClear>
+          <IsFree>true</IsFree>
+        </Room>
+      </Rooms>
+      <Client>
+        <Name>Jan</Name>
+        <Surname>Główka</Surname>
+        <IDNumer>RSE 654332</IDNumer>
+        <Phone>765-234-567</Phone>
+        <Sex>Man</Sex>
+        <Email>janglowka@add.asd</Email>
+      </Client>
+      <IsAdvance>false</IsAdvance>
+    </Reservation>
+  </Reservations>
+  <Rooms>
+    <Room>
+      <RoomNumber>1</RoomNumber>
+      <NumberOfSingleBeds>0</NumberOfSingleBeds>
+      <NumberOfMarriageBeds>1</NumberOfMarriageBeds>
+      <IsBalcony>false</IsBalcony>
+      <IsClear>false</IsClear>
+      <IsFree>true</IsFree>
+    </Room>
+    <Room>
+      <RoomNumber>2</RoomNumber>
+      <NumberOfSingleBeds>1</NumberOfSingleBeds>
+      <NumberOfMarriageBeds>1</NumberOfMarriageBeds>
+      <IsBalcony>false</IsBalcony>
+      <IsClear>false</IsClear>
+      <IsFree>true</IsFree>
+    </Room>
+  </Rooms>
+  <Clients>
+    <Client>
+      <Name>Jan</Name>
+      <Surname>Główka</Surname>
+      <IDNumer>RSE 654332</IDNumer>
+      <Phone>765-234-567</Phone>
+      <Sex>Man</Sex>
+      <Email>janglowka@add.asd</Email>
+    </Client>
+    <Client>
+      <Name>Zosia</Name>
+      <Surname>Samosia</Surname>
+      <IDNumer>RES 645378</IDNumer>
+      <Phone>546-653-765</Phone>
+      <Sex>Woman</Sex>
+      <Email>Zosia_samosia@gsr.dkfi</Email>
+    </Client>
+  </Clients>
+  <Employees>
+    <Employee>
+      <Name>Karolina</Name>
+      <Surname>Grzanka</Surname>
+      <Phone>879-987-987</Phone>
+      <Sex>Woman</Sex>
+      <Function>Administrator</Function>
+    </Employee>
+  </Employees>
+  <Logs>
+    <Log>
+      <Date>2019-01-19T11:35:12.7143556+01:00</Date>
+      <Type>CREATE_EMPLYEE</Type>
+      <Contents>Create emplyee Karolina Grzanka</Contents>
+      <Employee>
+        <Name>Karolina</Name>
+        <Surname>Grzanka</Surname>
+        <Phone>879-987-987</Phone>
+        <Sex>Woman</Sex>
+        <Function>Administrator</Function>
+      </Employee>
+    </Log>
+    <Log>
+      <Date>2019-01-19T11:35:12.7299677+01:00</Date>
+      <Type>CREATE_ROOM</Type>
+      <Contents>Create room 1</Contents>
+      <Employee>
+        <Name>Karolina</Name>
+        <Surname>Grzanka</Surname>
+        <Phone>879-987-987</Phone>
+        <Sex>Woman</Sex>
+        <Function>Administrator</Function>
+      </Employee>
+    </Log>
+    <Log>
+      <Date>2019-01-19T11:35:12.7299677+01:00</Date>
+      <Type>CREATE_ROOM</Type>
+      <Contents>Create room 2</Contents>
+      <Employee>
+        <Name>Karolina</Name>
+        <Surname>Grzanka</Surname>
+        <Phone>879-987-987</Phone>
+        <Sex>Woman</Sex>
+        <Function>Administrator</Function>
+      </Employee>
+    </Log>
+    <Log>
+      <Date>2019-01-19T11:35:12.7299677+01:00</Date>
+      <Type>CREATE_CLIENT</Type>
+      <Contents>Create client RSE 654332</Contents>
+      <Employee>
+        <Name>Karolina</Name>
+        <Surname>Grzanka</Surname>
+        <Phone>879-987-987</Phone>
+        <Sex>Woman</Sex>
+        <Function>Administrator</Function>
+      </Employee>
+    </Log>
+    <Log>
+      <Date>2019-01-19T11:35:12.7299677+01:00</Date>
+      <Type>CREATE_CLIENT</Type>
+      <Contents>Create client RES 645378</Contents>
+      <Employee>
+        <Name>Karolina</Name>
+        <Surname>Grzanka</Surname>
+        <Phone>879-987-987</Phone>
+        <Sex>Woman</Sex>
+        <Function>Administrator</Function>
+      </Employee>
+    </Log>
+    <Log>
+      <Date>2019-01-19T11:35:12.7299677+01:00</Date>
+      <Type>CREATE_RESERWATION</Type>
+      <Contents>Create reservation: Reservation room 1 28/09/2019 - 30/09/2019</Contents>
+      <Employee>
+        <Name>Karolina</Name>
+        <Surname>Grzanka</Surname>
+        <Phone>879-987-987</Phone>
+        <Sex>Woman</Sex>
+        <Function>Administrator</Function>
+      </Employee>
+    </Log>
+  </Logs>
+  <Accounts>
+    <Account>
+      <Client>
+        <Name>Jan</Name>
+        <Surname>Główka</Surname>
+        <IDNumer>RSE 654332</IDNumer>
+        <Phone>765-234-567</Phone>
+        <Sex>Man</Sex>
+        <Email>janglowka@add.asd</Email>
+      </Client>
+      <Payments>
+        <Payment xsi:type="Reservation">
+          <Title>Reservation room 1 28/09/2019 - 30/09/2019</Title>
+          <IsPaid>false</IsPaid>
+          <CheckInDate>2019-09-28T00:00:00</CheckInDate>
+          <CheckOutDate>2019-09-30T00:00:00</CheckOutDate>
+          <NumberOfAdults>2</NumberOfAdults>
+          <NumberOfChildren>0</NumberOfChildren>
+          <NumberOfBabies>0</NumberOfBabies>
+          <IsCheckIn>false</IsCheckIn>
+          <IsCheckOut>false</IsCheckOut>
+          <Canceled>false</Canceled>
+          <Rooms>
+            <Room>
+              <RoomNumber>1</RoomNumber>
+              <NumberOfSingleBeds>0</NumberOfSingleBeds>
+              <NumberOfMarriageBeds>1</NumberOfMarriageBeds>
+              <IsBalcony>false</IsBalcony>
+              <IsClear>false</IsClear>
+              <IsFree>true</IsFree>
+            </Room>
+          </Rooms>
+          <Client>
+            <Name>Jan</Name>
+            <Surname>Główka</Surname>
+            <IDNumer>RSE 654332</IDNumer>
+            <Phone>765-234-567</Phone>
+            <Sex>Man</Sex>
+            <Email>janglowka@add.asd</Email>
+          </Client>
+          <IsAdvance>false</IsAdvance>
+        </Payment>
+        <Payment xsi:type="SinglePayment">
+          <Title>Kawa late</Title>
+          <IsPaid>false</IsPaid>
+          <Price>10.5</Price>
+          <Quantity>2</Quantity>
+        </Payment>
+      </Payments>
+    </Account>
+    <Account>
+      <Client>
+        <Name>Zosia</Name>
+        <Surname>Samosia</Surname>
+        <IDNumer>RES 645378</IDNumer>
+        <Phone>546-653-765</Phone>
+        <Sex>Woman</Sex>
+        <Email>Zosia_samosia@gsr.dkfi</Email>
+      </Client>
+      <Payments />
+    </Account>
+  </Accounts>
+</Hotel>

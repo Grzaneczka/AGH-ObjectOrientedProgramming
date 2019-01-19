@@ -23,10 +23,13 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static string dir = Environment.CurrentDirectory;
+        public static string dir = Directory.GetCurrentDirectory();
         // automatycznie generuję scieżkę do hotel.xml
         // trochę nieładnie ale działa
-        public static Hotel h1 = Hotel.ReadXML(dir.Remove(dir.Length - 13,3) + "/hotel.xml");
+        public static Hotel h1 = Hotel.ReadXML(
+                    Directory.GetParent(dir)
+                    .ToString() + "/bin/debug/hotel.xml");
+
         public static List<Client> ListaKlientow = h1.Clients;
         public static List<Employee> ListaPracownikow = h1.Employees;
         public static List<Reservation> ListaRezerwacji = h1.Reservations;
