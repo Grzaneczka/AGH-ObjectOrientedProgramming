@@ -25,7 +25,7 @@ namespace GUI
     {
         public static string dir = Directory.GetCurrentDirectory();
         // automatycznie generuję scieżkę do hotel.xml
-        // trochę nieładnie ale działa
+        
         public static Hotel h1 = Hotel.ReadXML(
                     Directory.GetParent(dir)
                     .ToString() + "/bin/debug/hotel.xml");

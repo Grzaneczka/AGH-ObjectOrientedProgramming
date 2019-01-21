@@ -1,4 +1,6 @@
-﻿using System;
+﻿//https://github.com/Grzaneczka/AGH-ObjectOrientedProgramming
+//Karolina Grzanka, Szymon Bednarek, Filip Chełmikowski Bartlomiej Kalata, Michał Baran
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
